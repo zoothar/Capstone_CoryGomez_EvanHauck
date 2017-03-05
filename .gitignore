@@ -9,6 +9,9 @@ __init__.cpython-36.pyc
 admin.cpython-36.pyc
 models.cpython-36.pyc
 vcs.xml
+urls.cpython-36.pyc
+wsgi.cpython-36.pyc
+views.cpython-36.pyc
 
 # Windows image file caches
 Thumbs.db
