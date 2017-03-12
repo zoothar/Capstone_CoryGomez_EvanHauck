@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Capstone.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'ESRM_Sierra'),
+        'NAME': os.path.join(BASE_DIR, 'db.ESRM_Sierra'),
     }
 }
 
