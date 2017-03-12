@@ -12,7 +12,7 @@ class Record(models.Model):
     slrMJTot = models.DecimalField(max_digits=8,decimal_places=6)
     wSMs = models.DecimalField(max_digits=6,decimal_places=3)
     windDir = models.DecimalField(max_digits=5,decimal_places=1)
-    pARDen = models.IntegerField()
+    pARDen = models.DecimalField(max_digits=5,decimal_places=1)
     pARTotTot = models.DecimalField(max_digits=10,decimal_places=2)
     bPMmHg = models.DecimalField(max_digits=6,decimal_places=1)
     rainMmTot = models.IntegerField()
@@ -21,4 +21,4 @@ class Record(models.Model):
         ordering = ['-recordNum']
 
     def __str__(self):
-        return self.recordNum
+        return self.recordNumlo
