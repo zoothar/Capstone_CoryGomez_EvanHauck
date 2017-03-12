@@ -18,5 +18,5 @@ from WeatherStation import views
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^$', views.index)
 ]
