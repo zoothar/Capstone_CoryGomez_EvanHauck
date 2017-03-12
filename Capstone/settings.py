@@ -55,7 +55,7 @@ ROOT_URLCONF = 'Capstone.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'GitRemote/templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'WeatherStation/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
