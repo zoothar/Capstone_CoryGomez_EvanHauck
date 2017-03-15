@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from WeatherStation import views
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
     url(r'^$', views.index),
     url(r'$', views.plot)
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

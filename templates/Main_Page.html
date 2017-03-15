@@ -1,29 +1,32 @@
-{%  load static %}
-<link rel="stylesheet" type="text/css" href="{%  static 'Main_Functions.css' %}" />
+{%  load staticfiles %}
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>ESRM Weather Station Main Site</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{%  static 'Main_Functions.css' %}" />
 </head>
 
 <body>
-    <header>
-        CSUCI
-    </header>
-    <H1> Welcome to the ESRM Weather Station Page</H1>
-    <br>
-    <iframe src="Plot.html" height="200" width="300" style="border:none;"></iframe>
-    <button type="button">Submit</button>
-    <br>
+    <div class="container">
+        <header>
+            CSUCI
+        </header>
+        <H1> Welcome to the ESRM Weather Station Page</H1>
+        <br>
+        <iframe src="Plot.html" height="200" width="300" style="border:none;"></iframe>
+        <button type="button">Submit</button>
+        <br>
 
-    <footer>
-        Resources:
-        <br>
-        <a href="http://www.ventura.org/wcvc/calleguas.htm" target="_blank"> Calleguas Creek </a>
-        <br>
-        <a href="http://ipm.ucanr.edu/WEATHER/SITES/ventura.html" target="_blank"> Ventura County Stations </a>
-    </footer>
+        <footer>
+            Resources:
+            <br>
+            <a href="http://www.ventura.org/wcvc/calleguas.htm" target="_blank"> Calleguas Creek </a>
+            <br>
+            <a href="http://ipm.ucanr.edu/WEATHER/SITES/ventura.html" target="_blank"> Ventura County Stations </a>
+        </footer>
+    </div>
+
 </body>
 </html>
