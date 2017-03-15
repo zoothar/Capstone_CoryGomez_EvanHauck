@@ -21,5 +21,4 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'$', views.plot)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

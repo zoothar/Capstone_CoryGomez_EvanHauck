@@ -3,9 +3,10 @@
 <html>
 
 <head>
-    <title>ESRM Weather Station Main Site</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{%  static 'Main_Functions.css' %}" />
+    <title>ESRM Weather Station Main Site</title>
+    <link rel="stylesheet" type="text/css" href="{%  static 'css/Main_Functions.css' %}" />
+    <link rel="script" href="{%  static 'js/Main_Script.js' %}" />
 </head>
 
 <body>
@@ -15,8 +16,12 @@
         </header>
         <H1> Welcome to the ESRM Weather Station Page</H1>
         <br>
-        <iframe src="Plot.html" height="200" width="300" style="border:none;"></iframe>
-        <button type="button">Submit</button>
+        <form>
+            <label>Date Range</label><br>
+            <input id="dateField" type="date" min="01/01/2009" />
+            <input id="dateField" type="date" min="01/01/2009" /><br>
+            <input id="updateButton" type="submit" value="update" />
+        </form>
         <br>
 
         <footer>

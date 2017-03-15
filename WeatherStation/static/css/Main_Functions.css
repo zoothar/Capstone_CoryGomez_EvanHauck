@@ -1,4 +1,7 @@
 /* Main_Functions.css*/
+body{
+    font-size:  10px;
+}
 div.container{
     padding: 1em;
     background-color: red;
