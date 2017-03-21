@@ -1,32 +1,35 @@
-/* Main_Functions.css*/
 
+h1{font-size: 32px;}
 div.container{
     width: 100%;
-    border: 1px solid red;
-    background: #f9f9f9;
+    background-color: white;
 }
 
 body{
-    font-size:  10px;
+    font-size:  26px;
     background-color: white;
 }
 
 header{
-            padding: 1em;
-            background-color: red;
-            color: white;
+    padding: 1em;
+    color: white;
+    background-color: red;
+    clear: left;
+    text-align: left;
 }
 
 footer{
     padding: 1em;
-    background-color: red;
     color: white;
-
+    background-color: red;
+    clear: left;
+    text-align: center;
+    position: relative;
+    top: 100%;
 }
 
 article {
     margin-left: 0px;
-    border-left: 1px solid red;
     padding: 1em;
     overflow: hidden;
     background-color: white;

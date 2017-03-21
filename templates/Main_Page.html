@@ -17,11 +17,12 @@
         <br>
         <article>
             <H1> Welcome to the ESRM Weather Station Page</H1>
-            <form>
+            <br>
+            <form id="foo" onsubmit="update(); return true;" method="post">{% csrf_token %}
                 <label>Date Range</label><br>
-                <input id="dateField" type="date" min="01/01/2009" />
-                <input id="dateField" type="date" min="01/01/2009" /><br>
-                <input id="updateButton" type="submit" value="update" />
+                <input id="dateField1" type="date" min="01/01/2009" />
+                <input id="dateField2" type="date" min="01/01/2009" /><br>
+                <input id="updateButton" type="submit" value="update" onsubmit="" />
             </form>
             <br>
         </article>
