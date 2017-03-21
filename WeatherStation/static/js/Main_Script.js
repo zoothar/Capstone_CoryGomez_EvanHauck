@@ -13,3 +13,12 @@ if(mm<10){
 };
 today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("dateField").setAttribute("max", today);
+
+function update(){
+    alert_string = '';
+        alert_string = alert_string + document.getElementById('datefield1').value;
+        alert_string = alert_string + ' ';
+        alert_string = alert_string + document.getElementById('datefield2').value;
+
+        alert(alert_string);
+}
