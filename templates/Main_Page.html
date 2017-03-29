@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>ESRM Weather Station Main Site</title>
     <link rel="stylesheet" type="text/css" href="{%  static 'css/Main_Functions.css' %}" />
-    <link rel="script" href="{%  static 'js/Main_Script.js' %}" />
 </head>
 
 <body>
@@ -26,13 +25,6 @@
             </form>
             <br>
         </article>
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
 
 
         <footer>

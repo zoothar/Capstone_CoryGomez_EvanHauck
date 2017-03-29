@@ -6,8 +6,13 @@ import plotly.offline as offline
 
 import sqlite3
 
+#commented out evan's personal settings and replaced with mine, evan if you want yours to work you have to uncomment your code and comment out mine...
 
-conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+#Evan's
+#conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+
+#Cory's
+conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
 df = pd.read_sql_query('SELECT timeStamp, battAvg FROM WeatherStation_record', conn)
 #print(df.head()) #for testing connection

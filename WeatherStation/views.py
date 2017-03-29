@@ -13,7 +13,5 @@ def index(request):
     return HttpResponse(t.render(c, request))
 
 
-def plot(request):
-    t = loader.get_template('Plot.html')
-    c = {'foo': 'bar'}
-    return HttpResponse(t.render(c, request))
+def plot(request, plot_id):
+    return HttpResponse("<h2>ID for this page is:" + str(plot_id)+"</h2>" )
