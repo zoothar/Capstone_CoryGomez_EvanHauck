@@ -11,8 +11,11 @@ import sqlite3
 #Evan's
 conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
-#Cory's
+#Cory's Desktop
 #conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+
+#Cory's Laptop
+#conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
 df = pd.read_sql_query('SELECT timeStamp, battAvg FROM WeatherStation_record WHERE recordNum < 15', conn)
 #print(df.head()) #for testing connection
@@ -29,6 +32,7 @@ file_str = offline.plot({
             }, output_type='div')
 #file_loc = offline.plot({'data': [{'y': [4, 2, 3, 4]}],'layout': {'title': 'Test Plot','font': dict(size=16)}},image='png') #test example
 f = open("/home/evan/Documents/test_string_file.txt","w")
+#f = open("/home/batman/Documents/test_string_file.txt","w")
 
 print(f)
 f.write(file_str)
