@@ -14,7 +14,7 @@
             CSUCI
         </header>
         <br>
-        <article>
+        <nav>
             <H1> Welcome to the ESRM Weather Station Page</H1>
             <br>
             <form id="plotOptions" onsubmit="update(); return true;" method="post">{% csrf_token %}
@@ -28,6 +28,9 @@
             </form>
             <br>
 
+        </nav>
+        <article>
+            <iframe src="temporary.html"></iframe>
         </article>
 
 

@@ -10,5 +10,5 @@ def index(request):
     return render(request, 'Main_Page.html', context)
 
 
-def plot(request, plot_id):
-    return HttpResponse("<h2>ID for this page is:" + str(plot_id)+"</h2>" )
+def plot(request):
+    return render(request, 'temporary.html')
