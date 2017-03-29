@@ -1,6 +1,6 @@
 {%  load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
@@ -17,8 +17,11 @@
         <article>
             <H1> Welcome to the ESRM Weather Station Page</H1>
             <br>
-            <form id="foo" onsubmit="update(); return true;" method="post">{% csrf_token %}
-                <label>Date Range</label><br>
+            <form id="plotOptions" onsubmit="update(); return true;" method="post">{% csrf_token %}
+                <input type="checkbox" id="rain" name="rain" value="Rain"/> Rain-Fall<br>
+                <input type="checkbox" id="wind" name="wind" value="Wind"/> Wind Speed<br>
+                <input type="checkbox" id="voltage" name="voltage" value="Voltage"/> Battery Voltage<br>
+                <br>
                 <input id="dateField1" type="date" min="01/01/2009" />
                 <input id="dateField2" type="date" min="01/01/2009" /><br>
                 <input id="updateButton" type="submit" value="update" onsubmit="" />
