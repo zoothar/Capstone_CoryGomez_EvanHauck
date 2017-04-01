@@ -2,37 +2,115 @@ import plotly.graph_objs as go
 from plotly.graph_objs import Scatter
 import pandas as pd
 import plotly.offline as offline
-
-
 import sqlite3
 
-#commented out evan's personal settings and replaced with mine, evan if you want yours to work you have to uncomment your code and comment out mine...
+#function to be called in order to plot desired column, then return string to be embeded on webpage
+def plotGraph(column_num, startDate, endDate):
 
-#Evan's
-#conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #commented out evan's personal settings and replaced with mine, evan if you want yours to work you have to uncomment your code and comment out mine...
+    #Evan's
+    conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #Cory's Desktop
+    #conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #Cory's Laptop
+    #conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
-#Cory's Desktop
-#conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #may need to use these to add 00:00 for time depending on calander widget values
+    sDate=startDate
+    eDate=endDate
 
-#Cory's Laptop
-conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    # functions as a switch statement to generate the string to be embeded in the webpage
+    if column_num == 0:
+        qr = pd.read_sql_query("SELECT timeStamp, battAvg FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                           sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'],y=qr['battAvg'],mode='lines',name='Battery Voltages', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Voltage', type='log'))
+                   }, output_type='div')
+    elif column_num == 1:
+        qr = pd.read_sql_query("SELECT timeStamp, pTempCAvg FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['pTempCAvg'], mode='lines', name='Temperature', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Temperature', type='log'))
+                    }, output_type='div')
+    elif column_num == 2:
+        qr = pd.read_sql_query("SELECT timeStamp, airTCAvg FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['airTCAvg'], mode='lines', name='Temperature', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Temperature', type='log'))
+                    }, output_type='div')
+    elif column_num == 3:
+        qr = pd.read_sql_query("SELECT timeStamp, rH FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['rH'], mode='lines', name='rH', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='rH', type='log'))
+                    }, output_type='div')
+    elif column_num == 4:
+        qr = pd.read_sql_query("SELECT timeStamp, slrkW FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['slrkW'], mode='lines', name='slrkW', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='slrkW', type='log'))
+                    }, output_type='div')
+    elif column_num == 5:
+        qr = pd.read_sql_query("SELECT timeStamp, slrMJTot FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['slrMJTot'], mode='lines', name='slrMJTot', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='slrMJTot', type='log'))
+                    }, output_type='div')
+    elif column_num == 6:
+        qr = pd.read_sql_query("SELECT timeStamp, wSMs FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['wSMs'], mode='lines', name='wSMs', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='wSMs', type='log'))
+                    }, output_type='div')
+    elif column_num == 7:
+        qr = pd.read_sql_query("SELECT timeStamp, windDir FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['windDir'], mode='markers', name='windDir', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Wind Direction (degrees)', type='log'))
+                    }, output_type='div')
+    elif column_num == 8:
+        qr = pd.read_sql_query("SELECT timeStamp, pARTotTot FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['pARTotTot'], mode='lines', name='pARTotTot', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'),yaxis=go.YAxis(title='pARTotTot', type='log'))
+                    }, output_type='div')
+    elif column_num == 9:
+        qr = pd.read_sql_query("SELECT timeStamp, bPMmHg FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['bPMmHg'], mode='lines', name='Pressure', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'),yaxis=go.YAxis(title='Barometric Pressure (mmHg)', type='log'))
+        }, output_type='div')
+    elif column_num == 10:
+        qr = pd.read_sql_query("SELECT timeStamp, rainMmTot FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['rainMmTot'], mode='lines', name='Rainfall', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Rainfall (mm)', type='log'))
+                    }, output_type='div')
+    elif column_num == 11:
+        qr = pd.read_sql_query("SELECT timeStamp, pARDen FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                               sDate + "' AND '" + eDate + "'", conn)
+        file_str = offline.plot({
+                        'data': [Scatter(x=qr['timeStamp'], y=qr['pARDen'], mode='lines', name='pARDen', )],
+                        'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='pARDen', type='log'))
+                    }, output_type='div')
 
-df = pd.read_sql_query('SELECT timeStamp, battAvg FROM WeatherStation_record WHERE recordNum < 15', conn)
-#print(df.head()) #for testing connection
+    f = open("/home/evan/Documents/test_string_file.txt","w")
+    #f = open("/home/batman/Documents/test_string_file.txt","w")
 
-file_str = offline.plot({
-                'data': [
-                    Scatter(
-                        x=df['timeStamp'],
-                        y=df['battAvg'],
-                        mode='lines',
-                        name='Battery Voltages',)
-                ],
-                'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Voltage', type='log'))
-            }, output_type='div')
-#file_loc = offline.plot({'data': [{'y': [4, 2, 3, 4]}],'layout': {'title': 'Test Plot','font': dict(size=16)}},image='png') #test example
-#f = open("/home/evan/Documents/test_string_file.txt","w")
-f = open("/home/batman/Documents/test_string_file.txt","w")
+    #TODO: delete after testing
+    print(f)
+    f.write(file_str)
 
-print(f)
-f.write(file_str)
+    #returns string to be embeded
+    return file_str
