@@ -3,13 +3,28 @@ from django.shortcuts import render
 from .models import Record
 from.plotting import plotGraph
 
+column = 0
+start = "2016-03-30"
+end = "2016-04-30"
+
 def index(request):
     #models db connector
-    all_records = Record.objects.all()
-    context = {'all_record': all_records}
+    context = {
+        'column': column,
+        'startdate': start,
+        'enddate': end
+               }
     return render(request, 'Main_Page.html', context)
 
 
 def plot(request):
-    context = {'plotting': plotGraph(1, "2017-02-01", "2017-02-28")}
+    column= 0
+    start= "2016-03-30"
+    end= "2016-04-30"
+    context = {
+        'column': column,
+        'startdate': start,
+        'enddate': end,
+        'plotting': plotGraph(column, start, end)
+    }
     return render(request, 'Plot_Page.html', context)
