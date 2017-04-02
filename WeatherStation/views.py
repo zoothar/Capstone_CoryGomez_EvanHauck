@@ -11,4 +11,5 @@ def index(request):
 
 
 def plot(request):
-    return render(request, plotGraph(1, "2017-02-01", "2017-02-28"))
+    context = {'plotting': plotGraph(1, "2017-02-01", "2017-02-28")}
+    return render(request, 'Plot_Page.html', context)
