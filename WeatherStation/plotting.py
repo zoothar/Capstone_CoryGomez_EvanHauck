@@ -3,21 +3,22 @@ from plotly.graph_objs import Scatter
 import pandas as pd
 import plotly.offline as offline
 import sqlite3
+import datetime
 
 #function to be called in order to plot desired column, then return string to be embeded on webpage
 def plotGraph(column_num, startDate, endDate):
 
     #commented out evan's personal settings and replaced with mine, evan if you want yours to work you have to uncomment your code and comment out mine...
     #Evan's
-    #conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     #Cory's Desktop
-    conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     #Cory's Laptop
     #conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
-    #may need to use these to add 00:00 for time depending on calander widget values
-    sDate=startDate
-    eDate=endDate
+    # adds time to date
+    sDate = startDate + ' 00:00:00'
+    eDate = endDate + ' 23:59:59'
 
     # functions as a switch statement to generate the string to be embeded in the webpage
     if column_num == 0:
@@ -105,8 +106,8 @@ def plotGraph(column_num, startDate, endDate):
                         'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='pARDen', type='log'))
                     }, output_type='div')
 
-    #f = open("/home/evan/Documents/test_string_file.txt","w")
-    f = open("/home/batman/Documents/test_string_file.txt","w")
+    f = open("/home/evan/Documents/test_string_file.txt","w")
+    #f = open("/home/batman/Documents/test_string_file.txt","w")
 
     #TODO: delete after testing
     print(f)
@@ -114,3 +115,36 @@ def plotGraph(column_num, startDate, endDate):
 
     #returns string to be embeded
     return file_str
+
+
+#for downloading csv file between two dates with all columns
+def queryToCSV(startDate, endDate):
+
+    #adds time to date
+    sDate = startDate + ' 00:00:00'
+    eDate = endDate + ' 23:59:59'
+    # Evan's
+    conn = sqlite3.connect(
+        '/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    # Cory's Desktop
+    # conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    # Cory's Laptop
+    # conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+
+    #query database
+    qr = pd.read_sql_query("SELECT * FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
+                           sDate + "' AND '" + eDate + "'", conn)
+    qr.to_csv('WeatherStation_query_' + datetime.datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv')
+
+def downloadDbToCSV():
+
+    # Evan's
+    conn = sqlite3.connect(
+        '/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    # Cory's Desktop
+    # conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    # Cory's Laptop
+    # conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+
+    tbl = pd.read_sql_query("SELECT * FROM WeatherStation_record", conn)
+    tbl.to_csv('WeatherStation_' + datetime.datetime.now().strftime('%Y_%m_%d') + '.csv')
