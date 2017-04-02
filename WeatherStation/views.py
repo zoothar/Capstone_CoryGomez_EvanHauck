@@ -2,9 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from . plotting import plotGraph
 from . parameters import change
+from datetime import datetime
 column = 0
 start = "2016-03-30"
-end = "2016-04-30"
+now = datetime.now()
+end = datetime.__str__(now)
 
 
 def index(request):
