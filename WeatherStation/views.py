@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Record
-
+from.plotting import plotGraph
 
 def index(request):
     #models db connector
@@ -11,4 +11,4 @@ def index(request):
 
 
 def plot(request):
-    return render(request, 'temporary.html')
+    return render(request, plotGraph(1, "2017-02-01", "2017-02-28"))
