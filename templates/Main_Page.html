@@ -17,14 +17,18 @@
         <nav>
             <H1> Welcome to the ESRM Weather Station Page</H1>
             <br>
-            <form id="plotOptions" onsubmit="update(); return true;" method="post">{% csrf_token %}
-                <input type="checkbox" id="rain" name="rain" value="Rain"/> Rain-Fall<br>
-                <input type="checkbox" id="wind" name="wind" value="Wind"/> Wind Speed<br>
-                <input type="checkbox" id="voltage" name="voltage" value="Voltage"/> Battery Voltage<br>
+            <form id="plotOptions" onsubmit={{ change }} method="post">{% csrf_token %}
+                <div class="dropdown">
+                <select>
+                    <option value=0>Battery Average</option>
+                    <option value=1>pTempCAvg</option>
+                    <option value=2>airTCAvg</option>
+                    <option value=3>rH</option>
+                </select>
                 <br>
-                <input id="dateField1" type="date" min="01/01/2009" />
-                <input id="dateField2" type="date" min="01/01/2009" /><br>
-                <input id="updateButton" type="submit" value="update" onsubmit="" />
+                <input id="dateField1" type="date" min="2016-03-01" />
+                <input id="dateField2" type="date" min="2016-03-02" /><br>
+                <input id="PlotButton" type="submit" value="plot"  />
             </form>
             <br>
 

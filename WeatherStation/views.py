@@ -1,26 +1,26 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Record
-from.plotting import plotGraph
-
+from . plotting import plotGraph
+from . parameters import change
 column = 0
 start = "2016-03-30"
 end = "2016-04-30"
 
+
 def index(request):
+    global column,start,end
     #models db connector
     context = {
         'column': column,
         'startdate': start,
-        'enddate': end
+        'enddate': end,
+        'change': change(column, start, end)
                }
     return render(request, 'Main_Page.html', context)
 
 
 def plot(request):
-    column= 0
-    start= "2016-03-30"
-    end= "2016-04-30"
+    global column,start,end
     context = {
         'column': column,
         'startdate': start,

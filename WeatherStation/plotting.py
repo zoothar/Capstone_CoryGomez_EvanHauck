@@ -10,9 +10,9 @@ def plotGraph(column_num, startDate, endDate):
 
     #commented out evan's personal settings and replaced with mine, evan if you want yours to work you have to uncomment your code and comment out mine...
     #Evan's
-    conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     #Cory's Desktop
-    #conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     #Cory's Laptop
     #conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
@@ -102,12 +102,11 @@ def plotGraph(column_num, startDate, endDate):
                         'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='pARDen', type='log'))
                     }, output_type='div')
 
-    f = open("/home/evan/Documents/test_string_file.txt","w")
+    #f = open("/home/evan/Documents/test_string_file.txt","w")
     #f = open("/home/batman/Documents/test_string_file.txt","w")
 
-    #TODO: delete after testing
-    print(f)
-    f.write(file_str)
+    #print(f)
+    #f.write(file_str)
 
     #returns string to be embeded
     return file_str
@@ -117,10 +116,9 @@ def plotGraph(column_num, startDate, endDate):
 def queryToCSV(startDate, endDate):
 
     # Evan's
-    conn = sqlite3.connect(
-        '/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     # Cory's Desktop
-    # conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     # Cory's Laptop
     # conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
@@ -132,10 +130,9 @@ def queryToCSV(startDate, endDate):
 def downloadDbToCSV():
 
     # Evan's
-    conn = sqlite3.connect(
-        '/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     # Cory's Desktop
-    # conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     # Cory's Laptop
     # conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
