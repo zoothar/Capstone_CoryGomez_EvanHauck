@@ -1,4 +1,4 @@
-# used code from http://mitchfournier.com/2011/10/11/how-to-import-a-csv-or-tsv-file-into-a-django-model/ to import csv file
+# used code from http://mitchfournier.com/2011/10/11/how-to-import-a-csv-or-tsv-file-into-a-django-model/ to import csv
 
 # Full path and name to your csv file
 csv_filepathname="/home/evan/Documents/Capstone_randomFiles/weatherData.csv"
@@ -15,7 +15,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from WeatherStation.models import Record
 from datetime import datetime
 
-import csv, pytz
+import csv
 from pytz import timezone
 
 dataReader = csv.reader(open(csv_filepathname), delimiter=',')

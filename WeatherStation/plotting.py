@@ -18,7 +18,7 @@ def plotGraph(request, column_num, startDate, endDate):
     #Cory's Laptop
     #conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
-    # functions as a switch statement to generate the string to be embeded in the webpage
+    # functions as a switch statement to generate the string to be embedded in the web page
     if column_num == 0:
         qr = pd.read_sql_query("SELECT timeStamp, battAvg FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
                            startDate + "' AND '" + endDate + "'", conn)
@@ -114,7 +114,7 @@ def plotGraph(request, column_num, startDate, endDate):
     return file_str
 
 
-#for downloading csv file between two dates with all columns
+# for downloading csv file between two dates with all columns
 def queryToCSV(request, startDate, endDate):
 
     filename ='WeatherStation_' + datetime.datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
