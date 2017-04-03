@@ -20,7 +20,7 @@ def plotGraph( column_num, startDate, endDate):
     y = []
 
     if column_num == 0:
-        for i in Record.objects.filter(timeStamp__range=(startDate, endDate)):
+        for i in Record.objects.only("timeStamp", "battAvg").filter(timeStamp__range=(startDate, endDate)):
             x.append(i.timeStamp)
             y.append(i.battAvg)
 
@@ -35,28 +35,28 @@ def plotGraph( column_num, startDate, endDate):
     elif column_num == 1:
         for i in Record.objects.filter(timeStamp__range=(startDate, endDate)):
             x.append(i.timeStamp)
-            y.append(i.battAvg)
+            y.append(i.pTempCAvg)
 
         df = pd.DataFrame({'x': x, 'y': y})
         df.head()
 
-        data = [go.Scatter(x=df['x'], y=df['y'], mode='lines', name='Battery Voltages')]
+        data = [go.Scatter(x=df['x'], y=df['y'], mode='lines', name='P_Temp')]
         file_str =offline.plot({
             'data': data,
-            'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Voltage', type='log'))
+            'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Temperature (C)', type='log'))
         }, output_type='div')
     elif column_num == 2:
         for i in Record.objects.filter(timeStamp__range=(startDate, endDate)):
             x.append(i.timeStamp)
-            y.append(i.battAvg)
+            y.append(i.airTCAvg)
 
         df = pd.DataFrame({'x': x, 'y': y})
         df.head()
 
-        data = [go.Scatter(x=df['x'], y=df['y'], mode='lines', name='Battery Voltages')]
+        data = [go.Scatter(x=df['x'], y=df['y'], mode='lines', name='Air_Temp')]
         file_str =offline.plot({
             'data': data,
-            'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Voltage', type='log'))
+            'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Temperature (C)', type='log'))
         }, output_type='div')
     elif column_num == 3:
         for i in Record.objects.filter(timeStamp__range=(startDate, endDate)):
