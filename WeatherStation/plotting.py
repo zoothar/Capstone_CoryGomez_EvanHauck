@@ -8,7 +8,7 @@ from tempfile import NamedTemporaryFile
 from django.http import StreamingHttpResponse
 
 #function to be called in order to plot desired column, then return string to be embeded on webpage
-def plotGraph(request, column_num, startDate, endDate):
+def plotGraph( column_num, startDate, endDate):
 
     #commented out evan's personal settings and replaced with mine, evan if you want yours to work you have to uncomment your code and comment out mine...
     #Evan's
@@ -115,7 +115,7 @@ def plotGraph(request, column_num, startDate, endDate):
 
 
 # for downloading csv file between two dates with all columns
-def queryToCSV(request, startDate, endDate):
+def queryToCSV( startDate, endDate):
 
     filename ='WeatherStation_' + datetime.datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
 
@@ -142,7 +142,7 @@ def queryToCSV(request, startDate, endDate):
     return response
 
 
-def downloadDbToCSV(request):
+def downloadDbToCSV():
 
     # Evan's
     conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
