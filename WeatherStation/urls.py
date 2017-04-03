@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^plot/', views.plot, name='plot'),
-    url(r'^submit', views.submit, name='submit')
+    url(r'^plot', views.plot, name='plot'),
+    #url(r'^submit', views.submit, name='submit')
 ]

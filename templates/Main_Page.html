@@ -17,7 +17,7 @@
         <nav>
             <H1> Welcome to the ESRM Weather Station Page</H1>
             <br>
-            <form id="plotOptions" action="submit" method="post">{% csrf_token %}
+            <form id="plotOptions" target="plotted" action="plot" method="post">{% csrf_token %}
                 <div class="dropdown">
                 <select name="column">
                     <option value='0'>Battery Average</option>
@@ -34,15 +34,15 @@
                     <option value='11'>pARDen</option>
                 </select>
                 <br>
-                <input id="dateField1" name="dateField1" type="date" min="2016-03-01" max={{ enddate }}/>
-                <input id="dateField2" name="dateField2" type="date" min="2016-03-02" max={{ enddate }} /><br>
+                <input id="dateField1" name="dateField1" type="date" min="2016-03-01" max={{ endDate }}/>
+                <input id="dateField2" name="dateField2" type="date" min="2016-03-02" max={{ endDate }} /><br>
                 <input id="PlotButton" type="submit" value="plot" target="plotted"/>
             </form>
             <br>
 
         </nav>
         <article>
-            <iframe src="{%  url 'plot' %}" height= 600px width=100% name="plotted"></iframe>
+            <iframe src={{ plots }} height= 600px width=100% name="plotted"></iframe>
         </article>
 
 
