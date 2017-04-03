@@ -1,32 +1,36 @@
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from . plotting import plotGraph
-from . parameters import change
 from datetime import datetime
-column = 0
-start = "2016-03-30"
-now = datetime.now()
-end = datetime.__str__(now)
-
 
 def index(request):
-    global column,start,end
+    now = datetime.now()
+    end = datetime.__str__(now)
     #models db connector
     context = {
-        'column': column,
-        'startdate': start,
         'enddate': end,
-        'change': change(column, start, end)
                }
     return render(request, 'Main_Page.html', context)
 
 
 def plot(request):
-    global column,start,end
+    column = 0
+    start = "2016-03-01"
+    now = datetime.now()
+    end = datetime.__str__(now)
     context = {
-        'column': column,
-        'startdate': start,
-        'enddate': end,
         'plotting': plotGraph(column, start, end)
     }
     return render(request, 'Plot_Page.html', context)
+
+def submit(request):
+    column = request.POST.get('column')
+    start = request.POST.get('dateField1')
+    end = request.POST.get('dateField2')
+    #str = column + start + end
+    #print(str)
+    context = {
+        'plotting': plotGraph(column, start, end)
+    }
+    #str = '<html><body>' + plotGraph(plotGraph(column, start, end)) + '</body></html'
+    return HttpResponseRedirect('/main/submit/',context)
