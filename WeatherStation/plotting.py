@@ -4,15 +4,17 @@ import pandas as pd
 import plotly.offline as offline
 import sqlite3
 import datetime
+from tempfile import NamedTemporaryFile
+from django.http import StreamingHttpResponse
 
 #function to be called in order to plot desired column, then return string to be embeded on webpage
-def plotGraph(column_num, startDate, endDate):
+def plotGraph(request, column_num, startDate, endDate):
 
     #commented out evan's personal settings and replaced with mine, evan if you want yours to work you have to uncomment your code and comment out mine...
     #Evan's
-    #conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     #Cory's Desktop
-    conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     #Cory's Laptop
     #conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
@@ -113,26 +115,39 @@ def plotGraph(column_num, startDate, endDate):
 
 
 #for downloading csv file between two dates with all columns
-def queryToCSV(startDate, endDate):
+def queryToCSV(request, startDate, endDate):
+
+    filename ='WeatherStation_' + datetime.datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
+
+    #hardcoded for testing
+    #startDate = "2016-03-01 19:30:00"
+    #endDate = "2016-03-03 08:30:00"
 
     # Evan's
-    #conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     # Cory's Desktop
-    conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     # Cory's Laptop
     # conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
     #query database
     qr = pd.read_sql_query("SELECT * FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
                            startDate + "' AND '" + endDate + "'", conn)
-    qr.to_csv('WeatherStation_query_' + datetime.datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv')
 
-def downloadDbToCSV():
+    fl = NamedTemporaryFile(suffix='.csv')
+    qr.to_csv(fl.name)
+
+    response = StreamingHttpResponse(streaming_content=fl.name, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+    return response
+
+
+def downloadDbToCSV(request):
 
     # Evan's
-    #conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     # Cory's Desktop
-    conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    #conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
     # Cory's Laptop
     # conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
 
