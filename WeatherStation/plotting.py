@@ -4,13 +4,13 @@ import pandas as pd
 import plotly.offline as offline
 import sqlite3
 import datetime
-from tempfile import NamedTemporaryFile
 from django.http import StreamingHttpResponse
 import django
 django.setup()
 from WeatherStation.models import Record
 from pytz import timezone
 from datetime import datetime
+import csv
 
 pst = timezone('UTC')
 
@@ -187,37 +187,27 @@ def queryToCSV( startDate, endDate):
 
     filename ='WeatherStation_' + datetime.datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
 
-    #hardcoded for testing
-    #startDate = "2016-03-01 19:30:00"
-    #endDate = "2016-03-03 08:30:00"
-
-    # Evan's
-    conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
-    # Cory's Desktop
-    #conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
-    # Cory's Laptop
-    # conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
-
-    #query database
-    qr = pd.read_sql_query("SELECT * FROM WeatherStation_record WHERE timeStamp BETWEEN '" +
-                           startDate + "' AND '" + endDate + "'", conn)
-
-    fl = NamedTemporaryFile(suffix='.csv')
-    qr.to_csv(fl.name)
-
-    response = StreamingHttpResponse(streaming_content=fl.name, content_type='text/csv')
+    response = StreamingHttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+
+    writer = csv.writer(response)
+    for i in Record.objects.filter(startDate,endDate):
+        writer([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
+                str(i.slrkW), str(i.slrMJTot), str(i.wSMs),str(i.windDir),str(i.pARTotTot),str(i.bPMmHg),str(i.rainMmTot),
+                str(i.pARDen)])
     return response
 
 
 def downloadDbToCSV():
+    filename = 'WeatherStation_EntireDb_' + datetime.datetime.now().strftime('%Y_%m_%d_') + '.csv'
 
-    # Evan's
-    conn = sqlite3.connect('/home/evan/Documents/Capstone_randomFiles/CapstoneProject/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
-    # Cory's Desktop
-    #conn = sqlite3.connect('/home/batman/Documents/CSUCI/Capstone/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
-    # Cory's Laptop
-    # conn = sqlite3.connect('/home/batman/Documents/Project/Capstone_CoryGomez_EvanHauck/db.ESRM_Sierra')
+    response = StreamingHttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 
-    tbl = pd.read_sql_query("SELECT * FROM WeatherStation_record", conn)
-    tbl.to_csv('WeatherStation_' + datetime.datetime.now().strftime('%Y_%m_%d') + '.csv')
+    writer = csv.writer(response)
+    for i in Record.objects.all():
+        writer([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
+                str(i.slrkW), str(i.slrMJTot), str(i.wSMs), str(i.windDir), str(i.pARTotTot), str(i.bPMmHg),
+                str(i.rainMmTot),
+                str(i.pARDen)])
+    return response
