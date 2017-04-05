@@ -196,18 +196,3 @@ def queryToCSV( startDate, endDate):
                 str(i.slrkW), str(i.slrMJTot), str(i.wSMs),str(i.windDir),str(i.pARTotTot),str(i.bPMmHg),str(i.rainMmTot),
                 str(i.pARDen)])
     return response
-
-
-def downloadDbToCSV():
-    filename = 'WeatherStation_EntireDb_' + datetime.now().strftime('%Y_%m_%d_') + '.csv'
-
-    response = StreamingHttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
-
-    writer = csv.writer(response)
-    for i in Record.objects.all():
-        writer([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
-                str(i.slrkW), str(i.slrMJTot), str(i.wSMs), str(i.windDir), str(i.pARTotTot), str(i.bPMmHg),
-                str(i.rainMmTot),
-                str(i.pARDen)])
-    return response
