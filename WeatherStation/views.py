@@ -39,7 +39,7 @@ def plot(request):
     }
     return render(request, 'Plot_Page.html', context)
 
-def downloadDbToCSV():
+def downloadDbToCSV(request):
     filename = 'WeatherStation_EntireDb_' + datetime.now().strftime('%Y_%m_%d_') + '.csv'
 
     response = StreamingHttpResponse(content_type='text/csv')
