@@ -10,7 +10,8 @@ from WeatherStation.models import Record
 from datetime import datetime
 import csv
 
-
+#View for the main page, the context are connection points between python and the html for enddate
+# and the plot url in the iframe
 def index(request):
     now = datetime.now()
     end = datetime.__str__(now)
@@ -22,7 +23,9 @@ def index(request):
                }
     return render(request, 'Main_Page.html', context)
 
-
+# view for the plot page to show the generated graph in the iframe of the main page, this has a default value for
+# battery average from the first data set to the last the context creates the whole template dynamically and is called
+# in the template page as {{ plotting }}
 def plot(request):
     column = request.POST.get('column')
     start = request.POST.get('dateField1')
