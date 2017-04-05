@@ -185,7 +185,7 @@ def plotGraph( column_num, startDate, endDate):
 # for downloading csv file between two dates with all columns
 def queryToCSV( startDate, endDate):
 
-    filename ='WeatherStation_' + datetime.datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
+    filename ='WeatherStation_' + datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
 
     response = StreamingHttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
@@ -199,7 +199,7 @@ def queryToCSV( startDate, endDate):
 
 
 def downloadDbToCSV():
-    filename = 'WeatherStation_EntireDb_' + datetime.datetime.now().strftime('%Y_%m_%d_') + '.csv'
+    filename = 'WeatherStation_EntireDb_' + datetime.now().strftime('%Y_%m_%d_') + '.csv'
 
     response = StreamingHttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
