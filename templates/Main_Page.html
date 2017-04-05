@@ -33,10 +33,14 @@
                     <option value='10'>rainMmTot</option>
                     <option value='11'>pARDen</option>
                 </select>
+                </div>
                 <br>
                 <input id="dateField1" name="dateField1" type="date" min="2016-03-01" max={{ endDate }}/>
                 <input id="dateField2" name="dateField2" type="date" min="2016-03-02" max={{ endDate }} /><br>
                 <input id="PlotButton" type="submit" value="plot" target="plotted"/>
+            </form>
+             <form action="download" method="GET">
+                <input type="submit" value="Download CSV">
             </form>
             <br>
 
