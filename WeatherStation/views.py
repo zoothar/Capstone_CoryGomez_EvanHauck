@@ -1,15 +1,17 @@
 import csv
 
-from django.http import HttpResponseRedirect, StreamingHttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from . plotting import plotGraph
 import django
 django.setup()
 from WeatherStation.models import Record
-#from pytz import timezone
+from pytz import timezone
 from datetime import datetime
 import csv
+import warnings
 
+pst = timezone('UTC')
 #View for the main page, the context are connection points between python and the html for enddate
 # and the plot url in the iframe
 def index(request):
@@ -43,16 +45,36 @@ def plot(request):
     return render(request, 'Plot_Page.html', context)
 
 def downloadDbToCSV(request):
+
     filename = 'WeatherStation_EntireDb_' + datetime.now().strftime('%Y_%m_%d_') + '.csv'
 
-    response = StreamingHttpResponse(content_type='text/csv')
+    response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 
     writer = csv.writer(response)
     for i in Record.objects.all():
-        writer([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
+        writer.writerow([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
                 str(i.slrkW), str(i.slrMJTot), str(i.wSMs), str(i.windDir), str(i.pARTotTot), str(i.bPMmHg),
-                str(i.rainMmTot),
+                str(i.rainMmTot), str(i.pARDen)])
+        warnings.filterwarnings(
+            'error', r"DateTimeField .* received a naive datetime",
+            RuntimeWarning, r'django\.db\.models\.fields',
+        )
+    return response
+
+# for downloading csv file between two dates with all columns
+def queryToCSV( startDate, endDate):
+
+    filename ='WeatherStation_' + datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+
+    writer = csv.writer(response)
+    for i in Record.objects.filter(startDate,endDate):
+        dt = pst.localize(i.timeStamp)
+        writer.writerow([str(dt), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
+                str(i.slrkW), str(i.slrMJTot), str(i.wSMs),str(i.windDir),str(i.pARTotTot),str(i.bPMmHg),str(i.rainMmTot),
                 str(i.pARDen)])
     return response
 

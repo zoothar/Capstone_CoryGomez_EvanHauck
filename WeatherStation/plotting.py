@@ -1,16 +1,12 @@
 import plotly.graph_objs as go
-from plotly.graph_objs import Scatter
+#from plotly.graph_objs import Scatter
 import pandas as pd
 import plotly.offline as offline
-import sqlite3
-import datetime
-from django.http import StreamingHttpResponse
+
 import django
 django.setup()
 from WeatherStation.models import Record
 from pytz import timezone
-from datetime import datetime
-import csv
 
 pst = timezone('UTC')
 
@@ -180,19 +176,3 @@ def plotGraph( column_num, startDate, endDate):
 
     #returns string to be embeded
     return file_str
-
-
-# for downloading csv file between two dates with all columns
-def queryToCSV( startDate, endDate):
-
-    filename ='WeatherStation_' + datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
-
-    response = StreamingHttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
-
-    writer = csv.writer(response)
-    for i in Record.objects.filter(startDate,endDate):
-        writer([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
-                str(i.slrkW), str(i.slrMJTot), str(i.wSMs),str(i.windDir),str(i.pARTotTot),str(i.bPMmHg),str(i.rainMmTot),
-                str(i.pARDen)])
-    return response
