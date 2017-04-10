@@ -81,9 +81,8 @@ def queryToCSV(request):
     writer = csv.writer(response)
     writer.writerow(['timeStamp', 'recordNum', 'battAvg', 'pTempCAvg', 'rH', 'slrkW', 'slrMJTot', 'wSMs', 'pARTotTot',
                      'bPMmHg', 'rainMmHg', 'pARDen'])
-    for i in Record.objects.filter(startDate, endDate):
-        dt = pst.localize(i.timeStamp)
-        writer.writerow([str(dt), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
+    for i in Record.objects.filter(timeStamp__range=(startDate, endDate)):
+        writer.writerow([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
                 str(i.slrkW), str(i.slrMJTot), str(i.wSMs),str(i.windDir),str(i.pARTotTot),str(i.bPMmHg),str(i.rainMmTot),
                 str(i.pARDen)])
     return response
