@@ -10,6 +10,7 @@ from pytz import timezone
 from datetime import datetime
 import csv
 import warnings
+from . import jsonParse
 
 pst = timezone('UTC')
 #View for the main page, the context are connection points between python and the html for enddate
@@ -21,6 +22,7 @@ def index(request):
     #models db connector
     context = {
         'endDate': end,
+        'query': jsonParse.queryWeatherStation(),
         'plots': plotName
                }
     return render(request, 'Main_Page.html', context)
