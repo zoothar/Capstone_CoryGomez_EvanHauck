@@ -32,6 +32,7 @@ def plot(request):
     column = request.POST.get('column')
     start = request.POST.get('dateField1')
     end = request.POST.get('dateField2')
+
     if column== None:
         column = '0'
     if start== None:
@@ -39,7 +40,10 @@ def plot(request):
     if end== None:
         now = datetime.now()
         end = datetime.__str__(now)
+
     context = {
+        'start': start,
+        'end': end,
         'plotting': plotGraph(column, start, end)
     }
     return render(request, 'Plot_Page.html', context)
@@ -65,7 +69,9 @@ def downloadDbToCSV(request):
     return response
 
 # for downloading csv file between two dates with all columns
-def queryToCSV(request, startDate, endDate):
+def queryToCSV(request):
+    startDate = request.POST.get('startDate')
+    endDate = request.POST.get('endDate')
 
     filename ='WeatherStation_' + datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
 
@@ -75,7 +81,7 @@ def queryToCSV(request, startDate, endDate):
     writer = csv.writer(response)
     writer.writerow(['timeStamp', 'recordNum', 'battAvg', 'pTempCAvg', 'rH', 'slrkW', 'slrMJTot', 'wSMs', 'pARTotTot',
                      'bPMmHg', 'rainMmHg', 'pARDen'])
-    for i in Record.objects.filter(timeStamp__range=(startDate, endDate)):
+    for i in Record.objects.filter(startDate, endDate):
         dt = pst.localize(i.timeStamp)
         writer.writerow([str(dt), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
                 str(i.slrkW), str(i.slrMJTot), str(i.wSMs),str(i.windDir),str(i.pARTotTot),str(i.bPMmHg),str(i.rainMmTot),

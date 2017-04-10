@@ -10,5 +10,11 @@
     {% autoescape off %}
     {{ plotting }}
     {% endautoescape %}
+    <br>
+    <form id="downloadFromDate" action="downDate" method="POST">{% csrf_token %}
+        <input id="startDate" name="startDate" type="hidden" value={{ start }} />
+        <input id="endDate" name="endDate" type="hidden" value={{ end }}/>
+        <input type="submit" value="Download From Date-Range"/>
+    </form>
 </body>
 </html>
