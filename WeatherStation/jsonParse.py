@@ -8,12 +8,11 @@ from WeatherStation.models import Record
 def queryWeatherStation():
     last_rec = Record.objects.latest('recordNum')
     print(last_rec.recordNum)
+    # http://10.121.1.194/?command=dataquery&uri=dl:Table1&table=Table1&format=json&mode=since-record&p1=X   -where X is last record recorded
     com = "http://10.121.1.194/?command=dataquery&uri=dl:Table1&table=Table1&format=json&mode=since-record&p1=" + str(last_rec.recordNum)
     print(com)
     with urllib.request.urlopen(com) as url:
         j = json.loads(url.read().decode())
-
-    # http://10.121.1.194/?command=dataquery&uri=dl:Table1&table=Table1&format=json&mode=since-record&p1=X   -where X is last record recorded
 
     record = Record()
 
