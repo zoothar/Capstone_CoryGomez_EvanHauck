@@ -32,6 +32,7 @@ def plot(request):
     column = request.POST.get('column')
     start = request.POST.get('dateField1')
     end = request.POST.get('dateField2')
+
     if column== None:
         column = '0'
     if start== None:
@@ -39,7 +40,10 @@ def plot(request):
     if end== None:
         now = datetime.now()
         end = datetime.__str__(now)
+
     context = {
+        'start': start,
+        'end': end,
         'plotting': plotGraph(column, start, end)
     }
     return render(request, 'Plot_Page.html', context)
@@ -66,6 +70,8 @@ def downloadDbToCSV(request):
 
 # for downloading csv file between two dates with all columns
 def queryToCSV(request, startDate, endDate):
+    #startDate = request.POST.get('dateField1')
+    #endDate = request.POST.get('dateField2')
 
     filename ='WeatherStation_' + datetime.now().strftime('%Y_%m_%d__%H_%M') + '.csv'
 

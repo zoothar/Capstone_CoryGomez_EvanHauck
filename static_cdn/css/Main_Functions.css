@@ -1,6 +1,9 @@
 
 h1{
-    font-size: 32px;
+    font-size: 32pt;
+}
+div.check{
+    font-size: 8pt;
 }
 
 div.container{
@@ -11,10 +14,6 @@ div.container{
 body{
     font-size:  26px;
     background-color: white;
-    background-image: url('/images/determined-dolphin.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
 }
 
 header{
