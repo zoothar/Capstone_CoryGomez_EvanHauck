@@ -6,8 +6,15 @@
     <meta charset="UTF-8">
     <title>ESRM Weather Station Main Site</title>
     <link rel="stylesheet" type="text/css" href="{%  static 'css/Main_Functions.css' %}" />
+    <style>
+        div.frame{
+            position: absolute;
+            top: 250px;
+            left: 600px;
+        }
+    </style>
     <script>
-        setInterval({{ query }} , 1800000)
+      //  setInterval({{ query }} , 1800000)
     </script>
 </head>
 
@@ -17,7 +24,7 @@
             CSUCI
         </header>
         <br>
-        <nav>
+        <article>
             <H1> Welcome to the ESRM Weather Station Page</H1>
             <br>
             <form id="plotOptions" target="plotted" action="plot" method="post">{% csrf_token %}
@@ -47,9 +54,9 @@
                 <input type="submit" value="Download Entire CSV">
             </form>
             <br>
-
-        </nav>
-        <article>
+            <div class="frame">
+                <iframe src="recent" height= 200px width= 600px name="recent"></iframe>
+            </div>
             <iframe src={{ plots }} height= 600px width=100% name="plotted"></iframe>
         </article>
 
