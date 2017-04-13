@@ -22,7 +22,7 @@ def index(request):
     #models db connector
     context = {
         'endDate': end,
-        'query': jsonParse.queryWeatherStation(),
+        #'query': jsonParse.queryWeatherStation(),
         'plots': plotName
                }
     return render(request, 'Main_Page.html', context)
