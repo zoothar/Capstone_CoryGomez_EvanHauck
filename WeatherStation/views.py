@@ -19,7 +19,6 @@ def index(request):
     now = datetime.now()
     end = datetime.__str__(now)
     plotName = 'plot'
-    #models db connector
     context = {
         'endDate': end,
         #'query': jsonParse.queryWeatherStation(),
@@ -36,7 +35,7 @@ def plot(request):
     end = request.POST.get('dateField2')
 
     if column== None:
-        column = '0'
+        column = '2'
     if start== None:
         start = "2016-03-01"
     if end== None:
