@@ -10,7 +10,7 @@ from pytz import timezone
 from datetime import datetime
 import csv
 import warnings
-from . import jsonParse
+from . plotting import plotRecent
 
 pst = timezone('UTC')
 #View for the main page, the context are connection points between python and the html for enddate
@@ -87,4 +87,10 @@ def queryToCSV(request):
                 str(i.slrkW), str(i.slrMJTot), str(i.wSMs),str(i.windDir),str(i.pARTotTot),str(i.bPMmHg),str(i.rainMmTot),
                 str(i.pARDen)])
     return response
+
+def recent(request):
+    context = {
+        'recent': plotRecent()
+    }
+    return render(request, 'Recent.html', context)
 

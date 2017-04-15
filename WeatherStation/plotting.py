@@ -177,15 +177,15 @@ def plotGraph( column_num, startDate, endDate):
     #returns string to be embeded
     return file_str
 
-#def plotRecent():
-file_str = ''
-dt = Record.objects.latest('timeStamp')
-list = [['Time Stamp', 'Record Number', 'Battery Voltage', 'P Temp', 'Air Temp (C)', 'RH', 'slrkW', 'slr MJ Total',
+def plotRecent():
+    file_str = ''
+    dt = Record.objects.latest('timeStamp')
+    list = [['Time Stamp', 'Record Number', 'Battery Voltage', 'P Temp', 'Air Temp (C)', 'RH', 'slrkW', 'slr MJ Total',
          'wMSs', 'Wind Direction', 'pArtTot Total','Barometric Pressure (mmHg)', 'Rainfall (mm)', 'pARDen'],
         [dt.timeStamp, dt.recordNum, dt.battAvg, dt.pTempCAvg, dt.airTCAvg, dt.rH , dt.slrkW, dt.slrMJTot, dt.wSMs,
          dt.windDir, dt.pARTotTot, dt.bPMmHg, dt.rainMmTot, dt.pARDen]]
-table = ff.create_table(list)
+    table = ff.create_table(list)
 
-file_str = offline.plot(table)
-
-    #return file_str
+    file_str = offline.plot(table, output_type='div')
+   # print(file_str)
+    return file_str
