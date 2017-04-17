@@ -7,8 +7,9 @@ import django
 django.setup()
 from WeatherStation.models import Record
 from pytz import timezone
+from django.db.models import Max, Min, StdDev, Avg
 
-pst = timezone('UTC')
+#pst = timezone('UTC')
 
 #function to be called in order to plot desired column, then return string to be embeded on webpage
 def plotGraph( column_num, startDate, endDate):
@@ -177,15 +178,54 @@ def plotGraph( column_num, startDate, endDate):
     #returns string to be embeded
     return file_str
 
+def plotTable(column_num, startDate, endDate):
+    file_str = ''
+    selct = 'battAvg'
+    if column_num == '0':
+        selct = 'battAvg'
+    elif column_num == '1':
+        selct = 'pTempCAvg'
+    elif column_num == '2':
+        selct = 'airTCAvg'
+    elif column_num == '3':
+        selct = 'rH'
+    elif column_num == '4':
+        selct = 'slrkW'
+    elif column_num == '5':
+        selct = 'slrMJTot'
+    elif column_num == '6':
+        selct = 'wSMs'
+    elif column_num == '7':
+        selct = 'windDir'
+    elif column_num == '8':
+        selct = 'pARTotTot'
+    elif column_num == '9':
+        selct = 'bPMmHg'
+    elif column_num == '10':
+        selct = 'rainMmTot'
+    elif column_num == '11':
+        selct = 'pARDen'
+
+    dt = Record.objects.filter(timeStamp__range=(startDate, endDate))
+    list = [['Max', 'Min', 'Standard Deviation', 'Average'],
+            [dt.aggregate(val=Max(selct))['val'], dt.aggregate(val=Min(selct))['val'],
+             dt.aggregate(val=StdDev(selct))['val'], dt.aggregate(val=Avg(selct))['val']]]
+    #print(list[1][1])
+    table = ff.create_table(list)
+
+    file_str = offline.plot(table, output_type='div')
+    return file_str
+
+
 def plotRecent():
     file_str = ''
     dt = Record.objects.latest('timeStamp')
     list = [['Time Stamp', 'Record Number', 'Battery Voltage', 'P Temp', 'Air Temp (C)', 'RH', 'slrkW', 'slr MJ Total',
-         'wMSs', 'Wind Direction', 'pArtTot Total','Barometric Pressure (mmHg)', 'Rainfall (mm)', 'pARDen'],
-        [dt.timeStamp, dt.recordNum, dt.battAvg, dt.pTempCAvg, dt.airTCAvg, dt.rH , dt.slrkW, dt.slrMJTot, dt.wSMs,
-         dt.windDir, dt.pARTotTot, dt.bPMmHg, dt.rainMmTot, dt.pARDen]]
+             'wMSs', 'Wind Direction', 'pArtTot Total','Barometric Pressure (mmHg)', 'Rainfall (mm)', 'pARDen'],
+            [dt.timeStamp, dt.recordNum, dt.battAvg, dt.pTempCAvg, dt.airTCAvg, dt.rH , dt.slrkW, dt.slrMJTot, dt.wSMs,
+            dt.windDir, dt.pARTotTot, dt.bPMmHg, dt.rainMmTot, dt.pARDen]]
     table = ff.create_table(list)
 
     file_str = offline.plot(table, output_type='div')
-   # print(file_str)
+
     return file_str

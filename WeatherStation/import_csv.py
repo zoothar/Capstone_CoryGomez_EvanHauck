@@ -20,7 +20,6 @@ from pytz import timezone
 
 dataReader = csv.reader(open(csv_filepathname), delimiter=',')
 
-pst = timezone('US/Pacific')
 
 all_entries = Record.objects.all()
 
@@ -42,7 +41,7 @@ for row in dataReader:
     t = h + ':' + mn #for checking reformatting
     dt_obj = date + ' ' + t #for checking reformatting
     print(dt_obj) #for testing import and format
-    record.timeStamp = pst.localize(datetime(int(y), int(m), int(d), int(h), int(mn)))
+    record.timeStamp = datetime(int(y), int(m), int(d), int(h), int(mn))
     record.recordNum = row[1]
     record.battAvg = row[2]
     record.pTempCAvg = row[3]

@@ -57,8 +57,8 @@ def downloadDbToCSV(request):
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 
     writer = csv.writer(response)
-    writer.writerow(['timeStamp', 'recordNum', 'battAvg', 'pTempCAvg', 'rH', 'slrkW', 'slrMJTot', 'wSMs', 'pARTotTot',
-                     'bPMmHg','rainMmHg','pARDen'])
+    writer.writerow(['timeStamp', 'recordNum', 'battAvg','airTCAvg','pTempCAvg', 'rH', 'slrkW', 'slrMJTot', 'wSMs','windDir', 'pARTotTot',
+                     'bPMmHg', 'rainMmHg', 'pARDen'])
     for i in Record.objects.all():
         writer.writerow([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
                 str(i.slrkW), str(i.slrMJTot), str(i.wSMs), str(i.windDir), str(i.pARTotTot), str(i.bPMmHg),
@@ -80,7 +80,7 @@ def queryToCSV(request):
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 
     writer = csv.writer(response)
-    writer.writerow(['timeStamp', 'recordNum', 'battAvg', 'pTempCAvg', 'rH', 'slrkW', 'slrMJTot', 'wSMs', 'pARTotTot',
+    writer.writerow(['timeStamp', 'recordNum', 'battAvg','airTCAvg','pTempCAvg', 'rH', 'slrkW', 'slrMJTot', 'wSMs','windDir', 'pARTotTot',
                      'bPMmHg', 'rainMmHg', 'pARDen'])
     for i in Record.objects.filter(timeStamp__range=(startDate, endDate)):
         writer.writerow([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
