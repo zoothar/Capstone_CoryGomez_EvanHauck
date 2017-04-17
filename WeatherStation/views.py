@@ -11,6 +11,7 @@ from datetime import datetime
 import csv
 import warnings
 from . plotting import plotRecent
+from . plotting import plotTable
 
 pst = timezone('UTC')
 #View for the main page, the context are connection points between python and the html for enddate
@@ -45,7 +46,8 @@ def plot(request):
     context = {
         'start': start,
         'end': end,
-        'plotting': plotGraph(column, start, end)
+        'plotting': plotGraph(column, start, end),
+        'table': plotTable(column, start, end)
     }
     return render(request, 'Plot_Page.html', context)
 
