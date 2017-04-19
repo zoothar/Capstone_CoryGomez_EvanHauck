@@ -19,6 +19,7 @@ class Record(models.Model):
 
     class Meta:
         ordering = ['-recordNum']
+        managed = True
 
     def __str__(self):
         return self.recordNumlo
