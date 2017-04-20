@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'heroku_475d2b0004e70d7',
         'USER': 'b7fc10d82d5946',
         'PASSWORD': '43018d8f',
-        'OPTIONS': {'ssl': {'ca':'var/www/Capstone/cleardb-ca.pem', 'cert':'var/www/Capstone/b7fc10d82d5946-cert.pem', 'key':'var/www/Capstone/b7fc10d82d5946-key.pem'},}
+        'OPTIONS': {'ssl': {'ca':'https://esrm.herokuapp.com/Capstone/cleardb-ca.pem', 'cert':'https://esrm.herokuapp.com/Capstone/b7fc10d82d5946-cert.pem', 'key':'https://esrm.herokuapp.com//b7fc10d82d5946-key.pem'},}
     }
 }
 
