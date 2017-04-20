@@ -23,9 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f97p(5z*3u8)4d=fn-+-*p@fb^g(znp5py=33$&2ic&un3(j8%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+CSRF_COOKIE_SECURE = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SESSION_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = [u'esrm.herokuapp.com']
 
 
 # Application definition
@@ -121,11 +125,11 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
-STATICFILES_DIR = [
-    os.path.join(BASE_DIR, "WeatherStation/static"),
-    #'var/www/static/',
-]
+#STATICFILES_DIR = [
+#    os.path.join(BASE_DIR, "WeatherStation/static"),
+#    #'var/www/static/',
+#]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+#STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
