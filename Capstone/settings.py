@@ -27,6 +27,8 @@ DEBUG = False
 CSRF_COOKIE_SECURE = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = True
 
 
 ALLOWED_HOSTS = [u'https://esrm.herokuapp.com/','localhost','*']
@@ -86,7 +88,7 @@ DATABASES = {
         'NAME': 'heroku_475d2b0004e70d7',
         'USER': 'b7fc10d82d5946',
         'PASSWORD': '43018d8f',
-        'OPTIONS': {'ssl': {'ca':'cleardb-ca.pem', 'cert':'b7fc10d82d5946-cert.pem', 'key':'b7fc10d82d5946-key.pem'},}
+        'OPTIONS': {'ssl': {'ca':'var/www/Capstone_CoryGomez_EvanHauc/Capstonecleardb-ca.pem', 'cert':'var/www/Capstone_CoryGomez_EvanHauck/Capstone/b7fc10d82d5946-cert.pem', 'key':'var/www/Capstone_CoryGomez_EvanHauck/Capstone/b7fc10d82d5946-key.pem'},}
     }
 }
 
