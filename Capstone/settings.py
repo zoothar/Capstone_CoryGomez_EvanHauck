@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'Capstone.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'cdbr-iron-east-03.cleardb.net',
+        'HOST': 'www.cleardb.com',
         'NAME': 'heroku_475d2b0004e70d7',
         'USER': 'b7fc10d82d5946',
         'PASSWORD': '43018d8f'
