@@ -29,7 +29,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SESSION_COOKIE_SECURE = True
 
 
-ALLOWED_HOSTS = [u'https://esrm.herokuapp.com/']
+ALLOWED_HOSTS = [u'https://esrm.herokuapp.com/','localhost','*']
 
 
 # Application definition
