@@ -84,15 +84,15 @@ WSGI_APPLICATION = 'Capstone.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'us-cdbr-east.cleardb.com',
+        'HOST': 'us-cdbr-iron-east-03.cleardb.net',
         'NAME': 'heroku_475d2b0004e70d7',
         'USER': 'b7fc10d82d5946',
         'PASSWORD': '43018d8f',
-        #'OPTIONS': {'ssl': {'ca': os.path.join(BASE_DIR,'Capstone/cleardb-ca.pem'),
-         #                   'cert': os.path.join(BASE_DIR,'Capstone/b7fc10d82d5946-cert.pem'),
-          #                  'key': os.path.join(BASE_DIR,'Capstone/b7fc10d82d5946-key.pem')},}
-    }
-}
+#         'OPTIONS': {'ssl': {'ca': os.path.join(BASE_DIR,'Capstone/cleardb-ca.pem'),
+#                             'cert': os.path.join(BASE_DIR,'Capstone/b7fc10d82d5946-cert.pem'),
+#                             'key': os.path.join(BASE_DIR,'Capstone/b7fc10d82d5946-key.pem')},}
+     }
+ }
 
 
 # Password validation
