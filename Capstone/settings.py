@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'heroku_475d2b0004e70d7',
         'USER': 'b7fc10d82d5946',
         'PASSWORD': '43018d8f',
-        'OPTIONS': {'ssl': {'ca':'var/www/Capstone_CoryGomez_EvanHauc/Capstonecleardb-ca.pem', 'cert':'var/www/Capstone_CoryGomez_EvanHauck/Capstone/b7fc10d82d5946-cert.pem', 'key':'var/www/Capstone_CoryGomez_EvanHauck/Capstone/b7fc10d82d5946-key.pem'},}
+        'OPTIONS': {'ssl': {'ca':'var/www/Capstonecleardb-ca.pem', 'cert':'var/www/Capstone/b7fc10d82d5946-cert.pem', 'key':'var/www/Capstone/b7fc10d82d5946-key.pem'},}
     }
 }
 
