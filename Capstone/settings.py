@@ -23,15 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f97p(5z*3u8)4d=fn-+-*p@fb^g(znp5py=33$&2ic&un3(j8%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-CSRF_COOKIE_SECURE = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = True
+DEBUG = True
+#CSRF_COOKIE_SECURE = True
+#SECURE_CONTENT_TYPE_NOSNIFF = True
+#SESSION_COOKIE_SECURE = True
 
 
-ALLOWED_HOSTS = [u'https://esrm.herokuapp.com/','localhost','*']
+ALLOWED_HOSTS = [u'https://esrm.herokuapp.com/']
 
 
 # Application definition
@@ -84,15 +82,11 @@ WSGI_APPLICATION = 'Capstone.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'us-cdbr-iron-east-03.cleardb.net',
-        'NAME': 'heroku_475d2b0004e70d7',
-        'USER': 'b7fc10d82d5946',
-        'PASSWORD': '43018d8f',
-#         'OPTIONS': {'ssl': {'ca': os.path.join(BASE_DIR,'Capstone/cleardb-ca.pem'),
-#                             'cert': os.path.join(BASE_DIR,'Capstone/b7fc10d82d5946-cert.pem'),
-#                             'key': os.path.join(BASE_DIR,'Capstone/b7fc10d82d5946-key.pem')},}
-     }
- }
+        'NAME': 'esrm_SH',
+        'USER': 'root',
+        'PASSWORD': 'Dolphins2017'
+    }
+}
 
 
 # Password validation

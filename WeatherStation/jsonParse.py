@@ -1,24 +1,24 @@
-import django
-django.setup()
 import urllib.request, json
 import django
 django.setup()
 from WeatherStation.models import Record
 
-def queryWeatherStation():
-    last_rec = Record.objects.latest('recordNum')
-    print(last_rec.recordNum)
+def queryWeatherStation(js):
+    #last_rec = Record.objects.latest('recordNum')
+    #print(last_rec.recordNum)
     # http://10.121.1.194/?command=dataquery&uri=dl:Table1&table=Table1&format=json&mode=since-record&p1=X   -where X is last record recorded
-    com = "http://10.121.1.194/?command=dataquery&uri=dl:Table1&table=Table1&format=json&mode=since-record&p1=" + str(last_rec.recordNum)
-    print(com)
-    with urllib.request.urlopen(com) as url:
-        j = json.loads(url.read().decode())
+    #com = "http://10.121.1.194/?command=dataquery&uri=dl:Table1&table=Table1&format=json&mode=since-record&p1=" + str(last_rec.recordNum)
+    #print(com)
+    #with urllib.request.urlopen(com) as url:
+    #    j = json.loads(url.read().decode())
 
     record = Record()
 
     # extracting data (formatting the time properly) and importing into Record models db
+    j = json.loads(js.decode('ascii'))
     num_recs = len(j["data"])
-    print(str(num_recs))
+    print('Record Number: ' + str(j['data'][num_recs-1]['no']))
+    print('Number of records in JSON: ' + str(num_recs))
     count = 0
     while count < num_recs:
         dt = j['data'][count]['time']
