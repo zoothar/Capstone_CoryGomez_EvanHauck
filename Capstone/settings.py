@@ -79,15 +79,15 @@ WSGI_APPLICATION = 'Capstone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'HOST': 'cdbr-iron-east-03.cleardb.net',
-#         'NAME': 'heroku_475d2b0004e70d7',
-#         'USER': 'b7fc10d82d5946',
-#         'PASSWORD': '43018d8f'
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'cdbr-iron-east-03.cleardb.net',
+        'NAME': 'heroku_475d2b0004e70d7',
+        'USER': 'b7fc10d82d5946',
+        'PASSWORD': '43018d8f'
+    }
+}
 
 
 # Password validation
