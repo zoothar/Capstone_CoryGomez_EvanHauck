@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include,url
 from django.contrib import admin
+from WeatherStation import views
 
 urlpatterns = [
-    url(r'^main/', include('WeatherStation.urls')),
+    url(r'^$', views.index, name='index'),
+    url(r'^plot', views.plot, name='plot'),
+    url(r'^download', views.downloadDbToCSV, name='download'),
+    url(r'^downDate', views.queryToCSV, name='downDate'),
+    url(r'^recent', views.recent, name='recent')
 ]
