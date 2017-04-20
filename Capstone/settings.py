@@ -85,7 +85,8 @@ DATABASES = {
         'HOST': 'us-cdbr-east.cleardb.com',
         'NAME': 'heroku_475d2b0004e70d7',
         'USER': 'b7fc10d82d5946',
-        'PASSWORD': '43018d8f'
+        'PASSWORD': '43018d8f',
+        'OPTIONS': {'ssl': {'ca':'/Capstone_CoryGomez_EvanHauck/Capstone/cleardb-ca.pem', 'cert':'/Capstone_CoryGomez_EvanHauck/Capstone/b7fc10d82d5946-cert.pem', 'key':'/Capstone_CoryGomez_EvanHauck/Capstone/b7fc10d82d5946-key.pem'},}
     }
 }
 
