@@ -82,9 +82,10 @@ WSGI_APPLICATION = 'Capstone.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'esrm_SH',
-        'USER': 'root',
-        'PASSWORD': 'Dolphins2017'
+        'HOST': 'mysql://b7fc10d82d5946:43018d8f@us-cdbr-iron-east-03.cleardb.net/heroku_475d2b0004e70d7',
+        'NAME': 'heroku_475d2b0004e70d7',
+        'USER': 'b7fc10d82d5946',
+        'PASSWORD': '43018d8f'
     }
 }
 
