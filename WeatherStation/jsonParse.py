@@ -1,4 +1,4 @@
-import urllib.request, json
+import json
 import django
 django.setup()
 from WeatherStation.models import Record
