@@ -2,7 +2,6 @@
 from datetime import  datetime
 import django
 django.setup()
-from WeatherStation.hostname import gethost
 from socket import *
 from WeatherStation.jsonParse import queryWeatherStation
 
@@ -11,9 +10,9 @@ def runserv():
     s = socket(AF_INET, SOCK_STREAM)
     s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
-    host = gethost()
+    host = '54.173.229.200'
     print(host)
-    port = 12915
+    port = 80
 
     # bind to the port
     s.bind((host, port))
