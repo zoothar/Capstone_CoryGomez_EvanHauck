@@ -79,16 +79,23 @@ WSGI_APPLICATION = 'Capstone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': 'us-cdbr-iron-east-03.cleardb.net',
+#         'NAME': 'heroku_475d2b0004e70d7',
+#         'USER': 'b7fc10d82d5946',
+#         'PASSWORD': '43018d8f',
+#      }
+#  }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'us-cdbr-iron-east-03.cleardb.net',
-        'NAME': 'heroku_475d2b0004e70d7',
-        'USER': 'b7fc10d82d5946',
-        'PASSWORD': '43018d8f',
-#         'OPTIONS': {'ssl': {'ca': os.path.join(BASE_DIR,'Capstone/cleardb-ca.pem'),
-#                             'cert': os.path.join(BASE_DIR,'Capstone/b7fc10d82d5946-cert.pem'),
-#                             'key': os.path.join(BASE_DIR,'Capstone/b7fc10d82d5946-key.pem')},}
+        'HOST': 'cikeys.com',
+        'NAME': 'zootharc_weatherstation',
+        'USER': 'zootharc_admin',
+        'PASSWORD': 'Dolphins2017',
      }
  }
 
