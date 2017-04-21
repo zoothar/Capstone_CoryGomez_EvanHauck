@@ -2,15 +2,16 @@
 from datetime import  datetime
 import django
 django.setup()
+import socket
 from socket import *
 from WeatherStation.jsonParse import queryWeatherStation
 
 def runserv():
     # create a socket object
-    s = socket(AF_INET, SOCK_STREAM)
+    s = socket.socket(AF_INET, SOCK_STREAM)
     s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
-    host = 'ec2-174-129-120-185.compute-1.amazonaws.com'
+    host = socket.gethostbyname(socket.gethostname())
     print(host)
     port = 12915
 
