@@ -38,4 +38,4 @@ def queryWeatherStation(js):
         record.rainMmTot = j['data'][count]['vals'][11]
         print(" recNum = " + str(record.recordNum) + "    timeStamp--->  " +  str(record.timeStamp) )
         count = count + 1
-        record.save()
+        #record.save()
