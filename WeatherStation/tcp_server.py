@@ -9,7 +9,7 @@ from WeatherStation.jsonParse import queryWeatherStation
 s = socket(AF_INET, SOCK_STREAM)
 s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
-host = '10.31.143.236'
+host = 'ec2-174-129-120-185.compute-1.amazonaws.com'
 print(host)
 port = 12915
 
