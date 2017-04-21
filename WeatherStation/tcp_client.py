@@ -41,5 +41,6 @@ while True:
     s.close()
     print (msg.decode('ascii'))
     jload = json.loads(jsFile)
-    recent_rec = len(jload["data"])
+    count = len(jload["data"])
+    recent_rec = jload["data"][count-1]['no']
     time.sleep(30)
