@@ -29,7 +29,7 @@ DEBUG = True
 #SESSION_COOKIE_SECURE = True
 
 
-ALLOWED_HOSTS = [u'https://esrm.herokuapp.com/']
+ALLOWED_HOSTS = [u'https://esrm.herokuapp.com/', '*']
 
 
 # Application definition
@@ -82,11 +82,12 @@ WSGI_APPLICATION = 'Capstone.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'esrm_SH',
-        'USER': 'root',
-        'PASSWORD': 'Dolphins2017'
-    }
-}
+        'HOST': 'cikeys.com',
+        'NAME': 'zootharc_weatherstation',
+        'USER': 'zootharc_admin',
+        'PASSWORD': 'Dolphins2017',
+     }
+ }
 
 
 # Password validation
