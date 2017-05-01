@@ -106,7 +106,7 @@ def plotGraph( column_num, startDate, endDate):
         data = [go.Scatter(x=df['x'], y=df['y'], mode='lines', name='wSMs')]
         file_str =offline.plot({
             'data': data,
-            'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='wSMs', type='log'))
+            'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Wind Speed', type='log'))
         }, output_type='div')
     elif column_num == '7':
         for i in Record.objects.only("timeStamp", "windDir").filter(timeStamp__range=(startDate, endDate)):
@@ -221,7 +221,7 @@ def plotRecent():
     file_str = ''
     dt = Record.objects.latest('timeStamp')
     list = [['Time Stamp', 'Record Number', 'Battery Voltage', 'P Temp', 'Air Temp (C)', 'RH', 'slrkW', 'slr MJ Total',
-             'wMSs', 'Wind Direction', 'pArtTot Total','Baro Pres. (mmHg)', 'Rainfall (mm)', 'pARDen'],
+             'Wind Speed (m/s)', 'Wind Direction', 'pArtTot Total','Baro Pres. (mmHg)', 'Rainfall (mm)', 'pARDen'],
             [dt.timeStamp, dt.recordNum, dt.battAvg, dt.pTempCAvg, dt.airTCAvg, dt.rH , dt.slrkW, dt.slrMJTot, dt.wSMs,
             dt.windDir, dt.pARTotTot, dt.bPMmHg, dt.rainMmTot, dt.pARDen]]
     table = ff.create_table(list)
