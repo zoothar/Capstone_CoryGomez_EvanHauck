@@ -57,9 +57,6 @@
         }
 
     </style>
-    <script>
-      //  setInterval({{ query }} , 1800000)
-    </script>
 </head>
 
 <body>
@@ -81,20 +78,17 @@
                                 <option value='3'>rH</option>
                                 <option value='4'>slrkW</option>
                                 <option value='5'>slrMJTot</option>
-                                <option value='6'>wSMs</option>
-                                <option value='7'>windDir</option>
+                                <option value='6'>Wind Speed</option>
+                                <option value='7'>Wind Direction</option>
                                 <option value='8'>pARTotTot</option>
-                                <option value='9'>bPMmHg</option>
-                                <option value='10'>rainMmTot</option>
+                                <option value='9'>Barometric Pressure</option>
+                                <option value='10'>Rainfall Total</option>
                                 <option value='11'>pARDen</option>
                             </select>
                         </div>
                         <input id="dateField1" name="dateField1" type="date" min="2016-03-01" max={{ endDate }}/>
                         <input id="dateField2" name="dateField2" type="date" min="2016-03-02" max={{ endDate }} /><br>
                         <input id="PlotButton" type="submit" value="plot"/>
-                </form>
-                <form action="download" method="FILES">
-                    <input type="submit" value="Download Entire CSV">
                 </form>
                 <iframe src={{ plots }} height= 750px width=100% name="plotted"></iframe>
             </div>
@@ -107,6 +101,10 @@
             <br>
             <br>
             <br>
+            <br>
+            <form action="download" method="FILES">
+                <input type="submit" value="Download Entire DataBase">
+            </form>
         </article>
 
 
