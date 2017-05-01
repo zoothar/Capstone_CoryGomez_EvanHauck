@@ -221,7 +221,7 @@ def plotRecent():
     file_str = ''
     dt = Record.objects.latest('timeStamp')
     list = [['Time Stamp', 'Record Number', 'Battery Voltage', 'P Temp', 'Air Temp (C)', 'RH', 'slrkW', 'slr MJ Total',
-             'wMSs', 'Wind Direction', 'pArtTot Total','Baro Pres. (mmHg)', 'Rainfall (mm)', 'pARDen'],
+             'Wind Speed (m/s)', 'Wind Direction', 'pArtTot Total','Baro Pres. (mmHg)', 'Rainfall (mm)', 'pARDen'],
             [dt.timeStamp, dt.recordNum, dt.battAvg, dt.pTempCAvg, dt.airTCAvg, dt.rH , dt.slrkW, dt.slrMJTot, dt.wSMs,
             dt.windDir, dt.pARTotTot, dt.bPMmHg, dt.rainMmTot, dt.pARDen]]
     table = ff.create_table(list)
