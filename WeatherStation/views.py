@@ -23,7 +23,6 @@ def index(request):
     plotName = 'plot'
     context = {
         'endDate': end,
-        #'query': jsonParse.queryWeatherStation(),
         'plots': plotName
                }
     return render(request, 'Main_Page.html', context)
@@ -93,7 +92,6 @@ def queryToCSV(request):
 
 def recent(request):
     context = {
-       # 'recent': plotRecent()
         'time': plotting.getTimeStamp(),
         'temp': plotting.getAirTemp(),
         'humidity': plotting.getRainFall(),
