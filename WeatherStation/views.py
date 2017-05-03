@@ -36,7 +36,8 @@ def plot(request):
     start = request.POST.get('dateField1')
     ends = request.POST.get('dateField2')
     if ends is not None:
-        end = str(datetime.strptime(ends, "%Y-%m-%d") + timedelta(days=1))
+        end = str(datetime.strptime(ends, "%Y-%m-%d") + timedelta(days=1)) #had to do this so it would show all the
+                                                                           #data including the end parameter
 
     if column is None:
         column = '2'

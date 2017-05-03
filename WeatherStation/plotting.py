@@ -7,9 +7,12 @@ import django
 django.setup()
 from WeatherStation.models import Record
 from pytz import timezone
+import pytz
 from django.db.models import Max, Min, StdDev, Avg
+from datetime import datetime
+from datetime import timedelta
 
-#pst = timezone('UTC')
+pst = timezone('US/Pacific')
 
 #function to be called in order to plot desired column, then return string to be embeded on webpage
 def plotGraph( column_num, startDate, endDate):
@@ -232,7 +235,18 @@ def plotTable(column_num, startDate, endDate):
 
 def getTimeStamp():
     dt = Record.objects.latest('timeStamp')
-    return dt.timeStamp.strftime("%d %B %Y %I:%M%p")
+    stamp = dt.timeStamp
+    stampstr = str(dt.timeStamp)
+
+    ct, tm = stampstr.split(" ")
+    h, mn, s = tm.split(":")
+
+    now = datetime.now(tz=pytz.utc)
+    now = now.astimezone(pst)
+
+    if int(h) < now.hour:
+        stamp = stamp + timedelta(hours=1)
+    return stamp
 def getAirTemp():
     dt = Record.objects.latest('timeStamp')
     return str(dt.airTCAvg)
