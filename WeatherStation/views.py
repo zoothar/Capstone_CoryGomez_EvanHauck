@@ -8,6 +8,7 @@ django.setup()
 from WeatherStation.models import Record
 from pytz import timezone
 from datetime import datetime
+from datetime import timedelta
 import csv
 import warnings
 #from . plotting import plotRecent
@@ -33,13 +34,15 @@ def index(request):
 def plot(request):
     column = request.POST.get('column')
     start = request.POST.get('dateField1')
-    end = request.POST.get('dateField2')
+    ends = request.POST.get('dateField2')
+    if ends is not None:
+        end = str(datetime.strptime(ends, "%Y-%m-%d") + timedelta(days=1))
 
-    if column== None:
+    if column is None:
         column = '2'
-    if start== None:
+    if start is None:
         start = "2016-03-01"
-    if end== None:
+    if ends is None:
         now = datetime.now()
         end = datetime.__str__(now)
 
