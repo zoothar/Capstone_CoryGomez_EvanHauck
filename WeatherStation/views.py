@@ -10,8 +10,9 @@ from pytz import timezone
 from datetime import datetime
 import csv
 import warnings
-from . plotting import plotRecent
+#from . plotting import plotRecent
 from . plotting import plotTable
+from . import plotting
 
 pst = timezone('UTC')
 #View for the main page, the context are connection points between python and the html for enddate
@@ -92,7 +93,15 @@ def queryToCSV(request):
 
 def recent(request):
     context = {
-        'recent': plotRecent()
+       # 'recent': plotRecent()
+        'time': plotting.getTimeStamp(),
+        'temp': plotting.getAirTemp(),
+        'humidity': plotting.getRainFall(),
+        'rainfall': plotting.getRainFall(),
+        'voltage': plotting.getBattVolt(),
+        'windspeed': plotting.getWindSpeed(),
+        'winddirection': plotting.getWindDirection(),
+        'pressure': plotting.getBaroPres()
     }
     return render(request, 'Recent.html', context)
 

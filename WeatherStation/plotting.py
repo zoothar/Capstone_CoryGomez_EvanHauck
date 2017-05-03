@@ -229,3 +229,46 @@ def plotRecent():
     file_str = offline.plot(table, output_type='div')
 
     return file_str
+
+def getTimeStamp():
+    dt = Record.objects.latest('timeStamp')
+    return dt.timeStamp.strftime("%d %B %Y %I:%M%p")
+def getAirTemp():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.airTCAvg)
+def getWindSpeed():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.wSMs)
+def getWindDirection():
+    dt = Record.objects.latest('timeStamp')
+    compass = '' #following if/elseif statements designate a direction on the compass rose corresponding to
+                 # the value
+    if dt.windDir == 0 or dt.windDir == 360:
+        compass = 'E'
+    elif dt.windDir > 0 and dt.windDir < 90:
+        compass = 'NE'
+    elif dt.windDir == 90:
+        compass = 'N'
+    elif dt.windDir > 90 and dt.windDir < 180:
+        compass = 'NW'
+    elif dt.windDir ==180:
+        compass = 'W'
+    elif dt.windDir > 180 and dt.windDir < 270:
+        compass = 'SW'
+    elif dt.windDir == 270:
+        compass = 'S'
+    elif dt.windDir > 270 and dt.windDir < 360:
+        compass = 'SE'
+    return str(dt.windDir) + " " + compass
+def getBattVolt():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.battAvg)
+def getBaroPres():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.bPMmHg)
+def getRelativeHum():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.rH)
+def getRainFall():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.rainMmTot)
