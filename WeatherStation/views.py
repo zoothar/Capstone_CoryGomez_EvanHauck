@@ -98,7 +98,7 @@ def recent(request):
     context = {
         'time': plotting.getTimeStamp(),
         'temp': plotting.getAirTemp(),
-        'humidity': plotting.getRainFall(),
+        'humidity': plotting.getRelativeHum(),
         'rainfall': plotting.getRainFall(),
         'voltage': plotting.getBattVolt(),
         'windspeed': plotting.getWindSpeed(),
