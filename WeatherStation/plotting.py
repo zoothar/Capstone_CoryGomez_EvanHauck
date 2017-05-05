@@ -246,7 +246,7 @@ def getTimeStamp():
 
     if int(h) < now.hour:
         stamp = stamp + timedelta(hours=1)
-    return stamp
+    return stamp.strftime("%A %B %d, %Y %I:%M%p")
 def getAirTemp():
     dt = Record.objects.latest('timeStamp')
     return str(dt.airTCAvg)

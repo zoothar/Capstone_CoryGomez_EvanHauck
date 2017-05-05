@@ -4,8 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>ESRM Weather Station Main Site</title>
+    {% load static %}
 
     <style>
+        div.logo{
+            position: fixed;
+            right: 20px;
+            top: 300px;
+        }
         div.frame{
             position: absolute;
             top: 225px;
@@ -52,7 +58,10 @@
             margin-left: 0px;
             padding: 1em;
             overflow: hidden;
-            background-color: white;
+            background-image: url("{% static "ESRMlogo-marsh-cityscape-04.jpg" %}");
+            background-repeat: no-repeat;
+            background-position: 100% 0%;
+
         }
 
     </style>
@@ -105,6 +114,8 @@
             <form action="download" method="FILES">
                 <input type="submit" value="Download Entire DataBase">
             </form>
+
+
         </article>
 
 
