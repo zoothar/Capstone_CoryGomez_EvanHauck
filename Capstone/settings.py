@@ -23,10 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f97p(5z*3u8)4d=fn-+-*p@fb^g(znp5py=33$&2ic&un3(j8%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# CSRF_COOKIE_SECURE = True
-# SECURE_CONTENT_TYPE_NOSNIFF = True
-# SESSION_COOKIE_SECURE = True
+DEBUG = False
+CSRF_COOKIE_SECURE = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SESSION_COOKIE_SECURE = True
 
 
 ALLOWED_HOSTS = [u'https://esrm.herokuapp.com/', '*']
@@ -125,7 +125,9 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
+# heroku static files deployment help on https://devcenter.heroku.com/articles/django-assets
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIR = [
@@ -133,4 +135,5 @@ STATICFILES_DIR = [
    #'var/www/static/',
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
