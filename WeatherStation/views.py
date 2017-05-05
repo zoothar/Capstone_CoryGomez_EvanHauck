@@ -13,10 +13,12 @@ import csv
 import warnings
 from . plotting import plotTable
 from . import plotting
+from django.views.decorators.csrf import csrf_exempt
 
 pst = timezone('UTC')
 #View for the main page, the context are connection points between python and the html for enddate
 # and the plot url in the iframe
+@csrf_exempt
 def index(request):
     now = datetime.now()
     end = datetime.__str__(now)
@@ -31,6 +33,7 @@ def index(request):
 # view for the plot page to show the generated graph in the iframe of the main page, this has a default value for
 # battery average from the first data set to the last the context creates the whole template dynamically and is called
 # in the template page as {{ plotting }}
+@csrf_exempt
 def plot(request):
     column = request.POST.get('column')
     start = request.POST.get('dateField1')
@@ -55,7 +58,7 @@ def plot(request):
     }
     context.update(csrf(request))
     return render(request, 'Plot_Page.html', context)
-
+@csrf_exempt
 def downloadDbToCSV(request):
 
     filename = 'WeatherStation_EntireDb_' + datetime.now().strftime('%Y_%m_%d_') + '.csv'
@@ -77,6 +80,7 @@ def downloadDbToCSV(request):
     return response
 
 # for downloading csv file between two dates with all columns
+@csrf_exempt
 def queryToCSV(request):
     startDate = request.POST.get('startDate')
     endDate = request.POST.get('endDate')
