@@ -1,7 +1,7 @@
-import csv
-
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+from django.template.context_processors import csrf
+from django.shortcuts import render_to_response
 from . plotting import plotGraph
 import django
 django.setup()
@@ -11,7 +11,6 @@ from datetime import datetime
 from datetime import timedelta
 import csv
 import warnings
-#from . plotting import plotRecent
 from . plotting import plotTable
 from . import plotting
 
@@ -26,7 +25,8 @@ def index(request):
         'endDate': end,
         'plots': plotName
                }
-    return render(request, 'Main_Page.html', context)
+    context.update(csrf(request))
+    return render_to_response('Main_Page.html', context)
 
 # view for the plot page to show the generated graph in the iframe of the main page, this has a default value for
 # battery average from the first data set to the last the context creates the whole template dynamically and is called
@@ -53,6 +53,7 @@ def plot(request):
         'plotting': plotGraph(column, start, end),
         'table': plotTable(column, start, end)
     }
+    context.update(csrf(request))
     return render(request, 'Plot_Page.html', context)
 
 def downloadDbToCSV(request):
