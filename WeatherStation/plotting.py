@@ -258,21 +258,21 @@ def getWindDirection():
     compass = '' #following if/elseif statements designate a direction on the compass rose corresponding to
                  # the value
     if dt.windDir == 0 or dt.windDir == 360:
-        compass = 'E'
+        compass = 'N'
     elif dt.windDir > 0 and dt.windDir < 90:
         compass = 'NE'
     elif dt.windDir == 90:
-        compass = 'N'
+        compass = 'E'
     elif dt.windDir > 90 and dt.windDir < 180:
-        compass = 'NW'
+        compass = 'SE'
     elif dt.windDir ==180:
-        compass = 'W'
+        compass = 'S'
     elif dt.windDir > 180 and dt.windDir < 270:
         compass = 'SW'
     elif dt.windDir == 270:
-        compass = 'S'
+        compass = 'W'
     elif dt.windDir > 270 and dt.windDir < 360:
-        compass = 'SE'
+        compass = 'NW'
     return str(dt.windDir) + " " + compass
 def getBattVolt():
     dt = Record.objects.latest('timeStamp')
