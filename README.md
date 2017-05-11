@@ -30,4 +30,4 @@ Since we are running the data retrival code off of a Rasberry Pi, we ran into th
 
 Cory Gomez (cory.gomez257@gmail.com) Linkedin - [Cory's Linkedin Account](https://www.linkedin.com/in/cory-gomez-146054117)
 
-Evan Hauck (Gtrfan22@gmail.com) Linkedin - [Evan's Linkdedin Account](https://www.linkedin.com/in/evan-hauck-30a9b0a9)
+Evan Hauck (Evan.hauck5@gmail.com) Linkedin - [Evan's Linkdedin Account](https://www.linkedin.com/in/evan-hauck-30a9b0a9)
