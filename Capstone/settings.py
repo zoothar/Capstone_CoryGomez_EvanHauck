@@ -84,9 +84,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'cikeys.com',
-        'NAME': 'zootharc_weatherstation',
-        'USER': 'zootharc_admin',
-        'PASSWORD': 'Dolphins2017',
+        'NAME': 'pratela_weather',
+        'USER': 'piratela_dra',
+        'PASSWORD': 'Rainfall2017',
      }
  }
 
