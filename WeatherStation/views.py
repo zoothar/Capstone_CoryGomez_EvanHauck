@@ -58,14 +58,19 @@ def plot(request):
     }
     context.update(csrf(request))
     return render(request, 'Plot_Page.html', context)
+
+#Called by the download button to download the entire database
 @csrf_exempt
 def downloadDbToCSV(request):
 
+    #creates the file name for the download file
     filename = 'WeatherStation_EntireDb_' + datetime.now().strftime('%Y_%m_%d_') + '.csv'
 
+    #handles the request from the html page
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 
+    #writes the rows as csv, starting with the column names and then filling with the data from the database
     writer = csv.writer(response)
     writer.writerow(['timeStamp', 'recordNum', 'battAvg','airTCAvg','pTempCAvg', 'rH', 'slrkW', 'slrMJTot', 'wSMs','windDir', 'pARTotTot',
                      'bPMmHg', 'rainMmHg', 'pARDen'])
@@ -90,15 +95,18 @@ def queryToCSV(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 
+    #writes the rows as csv, starting with the column names and then filling with the data from the database
     writer = csv.writer(response)
     writer.writerow(['timeStamp', 'recordNum', 'battAvg','airTCAvg','pTempCAvg', 'rH', 'slrkW', 'slrMJTot', 'wSMs','windDir', 'pARTotTot',
                      'bPMmHg', 'rainMmHg', 'pARDen'])
+    #filters out the objects not within the desried date range
     for i in Record.objects.filter(timeStamp__range=(startDate, endDate)):
         writer.writerow([str(i.timeStamp), str(i.recordNum), str(i.battAvg), str(i.pTempCAvg), str(i.airTCAvg), str(i.rH),
                 str(i.slrkW), str(i.slrMJTot), str(i.wSMs),str(i.windDir),str(i.pARTotTot),str(i.bPMmHg),str(i.rainMmTot),
                 str(i.pARDen)])
     return response
 
+#gets the data for the current weather table
 def recent(request):
     context = {
         'time': plotting.getTimeStamp(),

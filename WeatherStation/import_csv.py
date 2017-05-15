@@ -1,3 +1,6 @@
+#
+# USED FOR THE INITIAL IMPORTING OF DATA FROM CSV FILE PROVIDED BY THE DEPARTMENT, NO LONGER NEEDED
+#
 # used code from http://mitchfournier.com/2011/10/11/how-to-import-a-csv-or-tsv-file-into-a-django-model/ to import csv
 
 # Full path and name to your csv file
