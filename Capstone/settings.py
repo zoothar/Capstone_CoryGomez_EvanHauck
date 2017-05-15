@@ -84,9 +84,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'cikeys.com',
-        'NAME': 'piratela_weather',
-        'USER': 'piratela_dra',
-        'PASSWORD': 'Rainfall2017',
+        'NAME': '*************',
+        'USER': '************',
+        'PASSWORD': '*********', # see Dr. Anderson for Username, Database name and password we omitted this information
+                                 # for security purposes
      }
  }
 
