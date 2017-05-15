@@ -7,9 +7,12 @@ import django
 django.setup()
 from WeatherStation.models import Record
 from pytz import timezone
+import pytz
 from django.db.models import Max, Min, StdDev, Avg
+from datetime import datetime
+from datetime import timedelta
 
-#pst = timezone('UTC')
+pst = timezone('US/Pacific')
 
 #function to be called in order to plot desired column, then return string to be embeded on webpage
 def plotGraph( column_num, startDate, endDate):
@@ -106,7 +109,7 @@ def plotGraph( column_num, startDate, endDate):
         data = [go.Scatter(x=df['x'], y=df['y'], mode='lines', name='wSMs')]
         file_str =offline.plot({
             'data': data,
-            'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='Wind Speed', type='log'))
+            'layout': go.Layout(xaxis=go.XAxis(title='Date'), yaxis=go.YAxis(title='wSMs', type='log'))
         }, output_type='div')
     elif column_num == '7':
         for i in Record.objects.only("timeStamp", "windDir").filter(timeStamp__range=(startDate, endDate)):
@@ -217,15 +220,69 @@ def plotTable(column_num, startDate, endDate):
     return file_str
 
 
-def plotRecent():
-    file_str = ''
+# def plotRecent():
+#     file_str = ''
+#     dt = Record.objects.latest('timeStamp')
+#     list = [['Time Stamp', 'Record Number', 'Battery Voltage', 'P Temp', 'Air Temp (C)', 'RH', 'slrkW', 'slr MJ Total',
+#              'Wind Speed (m/s)', 'Wind Direction', 'pArtTot Total','Baro Pres. (mmHg)', 'Rainfall (mm)', 'pARDen'],
+#             [dt.timeStamp, dt.recordNum, dt.battAvg, dt.pTempCAvg, dt.airTCAvg, dt.rH , dt.slrkW, dt.slrMJTot, dt.wSMs,
+#             dt.windDir, dt.pARTotTot, dt.bPMmHg, dt.rainMmTot, dt.pARDen]]
+#     table = ff.create_table(list)
+#
+#     file_str = offline.plot(table, output_type='div')
+#
+#     return file_str
+
+def getTimeStamp():
     dt = Record.objects.latest('timeStamp')
-    list = [['Time Stamp', 'Record Number', 'Battery Voltage', 'P Temp', 'Air Temp (C)', 'RH', 'slrkW', 'slr MJ Total',
-             'Wind Speed (m/s)', 'Wind Direction', 'pArtTot Total','Baro Pres. (mmHg)', 'Rainfall (mm)', 'pARDen'],
-            [dt.timeStamp, dt.recordNum, dt.battAvg, dt.pTempCAvg, dt.airTCAvg, dt.rH , dt.slrkW, dt.slrMJTot, dt.wSMs,
-            dt.windDir, dt.pARTotTot, dt.bPMmHg, dt.rainMmTot, dt.pARDen]]
-    table = ff.create_table(list)
+    stamp = dt.timeStamp
+    stampstr = str(dt.timeStamp)
 
-    file_str = offline.plot(table, output_type='div')
+    ct, tm = stampstr.split(" ")
+    h, mn, s = tm.split(":")
 
-    return file_str
+    now = datetime.now(tz=pytz.utc)
+    now = now.astimezone(pst)
+
+    if int(h) < now.hour:
+        stamp = stamp + timedelta(hours=1)
+    return stamp.strftime("%A %B %d, %Y %I:%M%p")
+def getAirTemp():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.airTCAvg)
+def getWindSpeed():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.wSMs)
+def getWindDirection():
+    dt = Record.objects.latest('timeStamp')
+    compass = '' #following if/elseif statements designate a direction on the compass rose corresponding to
+                 # the value
+    if dt.windDir == 0 or dt.windDir == 360:
+        compass = 'N'
+    elif dt.windDir > 0 and dt.windDir < 90:
+        compass = 'NE'
+    elif dt.windDir == 90:
+        compass = 'E'
+    elif dt.windDir > 90 and dt.windDir < 180:
+        compass = 'SE'
+    elif dt.windDir ==180:
+        compass = 'S'
+    elif dt.windDir > 180 and dt.windDir < 270:
+        compass = 'SW'
+    elif dt.windDir == 270:
+        compass = 'W'
+    elif dt.windDir > 270 and dt.windDir < 360:
+        compass = 'NW'
+    return str(dt.windDir) + " " + compass
+def getBattVolt():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.battAvg)
+def getBaroPres():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.bPMmHg)
+def getRelativeHum():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.rH)
+def getRainFall():
+    dt = Record.objects.latest('timeStamp')
+    return str(dt.rainMmTot)

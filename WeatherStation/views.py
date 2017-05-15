@@ -1,45 +1,52 @@
-import csv
-
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+from django.template.context_processors import csrf
+from django.shortcuts import render_to_response
 from . plotting import plotGraph
 import django
 django.setup()
 from WeatherStation.models import Record
 from pytz import timezone
 from datetime import datetime
+from datetime import timedelta
 import csv
 import warnings
-from . plotting import plotRecent
 from . plotting import plotTable
+from . import plotting
+from django.views.decorators.csrf import csrf_exempt
 
 pst = timezone('UTC')
 #View for the main page, the context are connection points between python and the html for enddate
 # and the plot url in the iframe
+@csrf_exempt
 def index(request):
     now = datetime.now()
     end = datetime.__str__(now)
     plotName = 'plot'
     context = {
         'endDate': end,
-        #'query': jsonParse.queryWeatherStation(),
         'plots': plotName
                }
-    return render(request, 'Main_Page.html', context)
+    context.update(csrf(request))
+    return render_to_response('Main_Page.html', context)
 
 # view for the plot page to show the generated graph in the iframe of the main page, this has a default value for
 # battery average from the first data set to the last the context creates the whole template dynamically and is called
 # in the template page as {{ plotting }}
+@csrf_exempt
 def plot(request):
     column = request.POST.get('column')
     start = request.POST.get('dateField1')
-    end = request.POST.get('dateField2')
+    ends = request.POST.get('dateField2')
+    if ends is not None:
+        end = str(datetime.strptime(ends, "%Y-%m-%d") + timedelta(days=1)) #had to do this so it would show all the
+                                                                           #data including the end parameter
 
-    if column== None:
+    if column is None:
         column = '2'
-    if start== None:
+    if start is None:
         start = "2016-03-01"
-    if end== None:
+    if ends is None:
         now = datetime.now()
         end = datetime.__str__(now)
 
@@ -49,8 +56,9 @@ def plot(request):
         'plotting': plotGraph(column, start, end),
         'table': plotTable(column, start, end)
     }
+    context.update(csrf(request))
     return render(request, 'Plot_Page.html', context)
-
+@csrf_exempt
 def downloadDbToCSV(request):
 
     filename = 'WeatherStation_EntireDb_' + datetime.now().strftime('%Y_%m_%d_') + '.csv'
@@ -72,6 +80,7 @@ def downloadDbToCSV(request):
     return response
 
 # for downloading csv file between two dates with all columns
+@csrf_exempt
 def queryToCSV(request):
     startDate = request.POST.get('startDate')
     endDate = request.POST.get('endDate')
@@ -92,7 +101,14 @@ def queryToCSV(request):
 
 def recent(request):
     context = {
-        'recent': plotRecent()
+        'time': plotting.getTimeStamp(),
+        'temp': plotting.getAirTemp(),
+        'humidity': plotting.getRelativeHum(),
+        'rainfall': plotting.getRainFall(),
+        'voltage': plotting.getBattVolt(),
+        'windspeed': plotting.getWindSpeed(),
+        'winddirection': plotting.getWindDirection(),
+        'pressure': plotting.getBaroPres()
     }
     return render(request, 'Recent.html', context)
 

@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'Capstone.urls'
@@ -125,12 +126,15 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
+# heroku static files deployment help on https://devcenter.heroku.com/articles/django-assets
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
 
-#STATIC_URL = '/static/'
+STATICFILES_DIR = [
+   os.path.join(BASE_DIR, "WeatherStation/static"),
+   #'var/www/static/',
+]
 
-#STATICFILES_DIR = [
-#    os.path.join(BASE_DIR, "WeatherStation/static"),
-#    #'var/www/static/',
-#]
 
-#STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

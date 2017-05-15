@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include,url
 from django.contrib import admin
 from WeatherStation import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -23,4 +25,4 @@ urlpatterns = [
     url(r'^download', views.downloadDbToCSV, name='download'),
     url(r'^downDate', views.queryToCSV, name='downDate'),
     url(r'^recent', views.recent, name='recent')
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,19 +1,26 @@
-{%  load staticfiles %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
     <title>ESRM Weather Station Main Site</title>
+    {% load static %}
 
     <style>
+        div.logo{
+            position: fixed;
+            right: 20px;
+            top: 300px;
+        }
         div.frame{
             position: absolute;
-            top: 250px;
+            top: 225px;
+            height: 330px;
+            width: 595px
         }
         div.plot-menu{
             position: relative;
-            top:150px;
+            top:255px;
 
         }
 
@@ -45,17 +52,19 @@
             background-color: red;
             clear: left;
             text-align: center;
+            font-size: 14px;
             position: relative;
             top: 100%;
         }
-
         article {
-            margin-left: 0px;
-            padding: 1em;
-            overflow: hidden;
-            background-color: white;
-        }
+                margin-left: 0px;
+                padding: 1em;
+                overflow: hidden;
+                background-image: url("{% static "ESRMlogo-marsh-cityscape-04.jpg" %}");
+                background-repeat: no-repeat;
+                background-position: 100% 0%;
 
+            }
     </style>
 </head>
 
@@ -72,30 +81,31 @@
                     <form id="plotOptions" target="plotted" action="plot" method="post">{% csrf_token %}
                         <div class="dropdown">
                             <select name="column">
-                                <option value='0'>Battery Average</option>
-                                <option value='1'>pTempCAvg</option>
-                                <option value='2'>airTCAvg</option>
-                                <option value='3'>rH</option>
-                                <option value='4'>slrkW</option>
-                                <option value='5'>slrMJTot</option>
+                                <option value='2'>Air Temperature</option>
+                                <option value='1'>Potential Temperature</option>
+                                <option value='10'>Rainfall Total</option>
+                                <option value='0'>Battery Voltage</option>
+                                <option value='3'>Relative Humidity</option>
+                                <option value='4'>Solar Radiation Sensor(Kw)</option>
+                                <option value='5'>Solar Radiation Sensor(MJ)</option>
                                 <option value='6'>Wind Speed</option>
                                 <option value='7'>Wind Direction</option>
-                                <option value='8'>pARTotTot</option>
                                 <option value='9'>Barometric Pressure</option>
-                                <option value='10'>Rainfall Total</option>
-                                <option value='11'>pARDen</option>
+                                <option value='8'>Photosynthetically Active Radiation Total</option>
+                                <option value='11'>Photosynthetically Active Radiation Density</option>
                             </select>
                         </div>
                         <input id="dateField1" name="dateField1" type="date" min="2016-03-01" max={{ endDate }}/>
-                        <input id="dateField2" name="dateField2" type="date" min="2016-03-02" max={{ endDate }} /><br>
-                        <input id="PlotButton" type="submit" value="plot"/>
+                        <input id="dateField2" name="dateField2" type="date" min="2016-03-02" max={{ endDate }} />
+                        <input id="PlotButton" type="submit" value="Plot"/>
                 </form>
-                <iframe src={{ plots }} height= 750px width=100% name="plotted"></iframe>
+                <iframe src={{ plots }} height= 650px width=100% name="plotted"></iframe>
             </div>
             <br>
             <div class="frame">
-                <iframe src="recent" height= 200px width= 1850 name="recent"></iframe>
+                <iframe src="recent" height= 100% width= 100% frameborder="0" scrolling="no" name="recent"></iframe>
             </div>
+            <br>
             <br>
             <br>
             <br>
@@ -105,6 +115,8 @@
             <form action="download" method="FILES">
                 <input type="submit" value="Download Entire DataBase">
             </form>
+
+
         </article>
 
 
@@ -114,6 +126,10 @@
             <a href="http://www.ventura.org/wcvc/calleguas.htm" target="_blank"> Calleguas Creek </a>
             <br>
             <a href="http://ipm.ucanr.edu/WEATHER/SITES/ventura.html" target="_blank"> Ventura County Stations </a>
+            <br>
+            <a href="http://w1.weather.gov/obhistory/KCMA.html" target="_blank">Government Weather Station Data for Camarillo</a>
+            <br>
+            Created by: Cory Gomez and Evan Hauck Spring 2017
         </footer>
     </div>
 
