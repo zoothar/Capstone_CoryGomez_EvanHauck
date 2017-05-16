@@ -8,9 +8,9 @@
 
     <style>
         div.logo{
-            position: fixed;
-            right: 20px;
-            top: 300px;
+            position: absolute;
+            top: 0%;
+            right: 100%;
         }
         div.frame{
             position: absolute;
@@ -42,6 +42,9 @@
             background-color: red;
             clear: left;
             text-align: left;
+            background-image: url("{% static "ESRMlogo-marsh-cityscape-sm.jpg" %}");
+            background-repeat: no-repeat;
+            background-position: 100% 0%;
         }
 
         footer{
@@ -58,9 +61,6 @@
                 margin-left: 0px;
                 padding: 1em;
                 overflow: hidden;
-                background-image: url("{% static "ESRMlogo-marsh-cityscape-04.jpg" %}");
-                background-repeat: no-repeat;
-                background-position: 100% 0%;
 
             }
     </style>
@@ -113,6 +113,11 @@
             <form action="download" method="FILES">
                 <input type="submit" value="Download Entire DataBase">
             </form>
+            <div class="logo">
+                <a href="default.asp">
+                    <img src="{% static "ESRMlogo-marsh-cityscape-04.jpg" %}">
+                </a>
+            </div>
 
 
         </article>
@@ -121,9 +126,13 @@
         <footer>
             Resources:
             <br>
-            <a href="http://www.ventura.org/wcvc/calleguas.htm" target="_blank"> Calleguas Creek </a>
+            <a href="ESRM.Zone" target="_blank">ESRM Zone</a>
             <br>
-            <a href="http://ipm.ucanr.edu/WEATHER/SITES/ventura.html" target="_blank"> Ventura County Stations </a>
+            <a href="Piratelab.org" target="_blank">Pirate Lab</a>
+            <br>
+            <a href="http://www.ventura.org/wcvc/calleguas.htm" target="_blank">Calleguas Creek </a>
+            <br>
+            <a href="http://ipm.ucanr.edu/WEATHER/SITES/ventura.html" target="_blank">Ventura County Stations </a>
             <br>
             <a href="http://w1.weather.gov/obhistory/KCMA.html" target="_blank">Government Weather Station Data for Camarillo</a>
             <br>
