@@ -90,8 +90,8 @@
                                 <option value='11'>Photosynthetically Active Radiation Density</option>
                             </select>
                         </div>
-                        <input id="dateField1" name="dateField1" type="date" min="2016-03-01" max={{ endDate }}/>
-                        <input id="dateField2" name="dateField2" type="date" min="2016-03-02" max={{ endDate }} />
+                        <input id="dateField1" name="dateField1" type="date" value="2016-03-01" min="2016-03-01" max={{ endDate }}/>
+                        <input id="dateField2" name="dateField2" type="date" min="2016-03-01" max={{ endDate }} value={{ endDate }} />
                         <input id="PlotButton" type="submit" value="Plot"/>
                 </form>
                 <iframe src={{ plots }} height= 650px width=100% name="plotted"></iframe>
