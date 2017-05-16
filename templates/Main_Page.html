@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
-
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>ESRM Weather Station Main Site</title>
-    {% load static %}
+
 
     <style>
         div.logo{
             position: absolute;
-            top: 0%;
-            right: 100%;
+            top: 100px;
+            right: 20px;
         }
         div.frame{
             position: absolute;
@@ -42,9 +42,6 @@
             background-color: red;
             clear: left;
             text-align: left;
-            background-image: url("{% static "ESRMlogo-marsh-cityscape-sm.jpg" %}");
-            background-repeat: no-repeat;
-            background-position: 100% 0%;
         }
 
         footer{
@@ -114,8 +111,8 @@
                 <input type="submit" value="Download Entire DataBase">
             </form>
             <div class="logo">
-                <a href="default.asp">
-                    <img src="{% static "ESRMlogo-marsh-cityscape-04.jpg" %}">
+                <a href="http://www.ESRM.Zone">
+                    <img src="{% static "ESRMlogo-marsh-cityscape-04.jpg" %}" alt="Logo" width="150" height="150" border="0">
                 </a>
             </div>
 
@@ -126,9 +123,9 @@
         <footer>
             Resources:
             <br>
-            <a href="ESRM.Zone" target="_blank">ESRM Zone</a>
+            <a href="http://www.ESRM.Zone" target="_blank">ESRM Zone</a>
             <br>
-            <a href="Piratelab.org" target="_blank">Pirate Lab</a>
+            <a href="http://www.Piratelab.org" target="_blank">Pirate Lab</a>
             <br>
             <a href="http://www.ventura.org/wcvc/calleguas.htm" target="_blank">Calleguas Creek </a>
             <br>
