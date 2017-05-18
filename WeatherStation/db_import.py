@@ -89,7 +89,7 @@ while True:
         # envelope header.
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("esrm.ci.weatherstation@gmail.com", "7021$$mAuI^3")
+        s.login("******", "*******")
         s.sendmail(me, [you], msg.as_string())
         s.quit()
     #repeat error message
@@ -98,7 +98,7 @@ while True:
         # envelope header.
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("esrm.ci.weatherstation@gmail.com", "7021$$mAuI^3")
+        s.login("*****", "******")
         s.sendmail(me, [you], msg.as_string())
         s.quit()
     #checking to see if it is consistently above the upper bound to break error sequence
@@ -108,7 +108,7 @@ while True:
         # envelope header.
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("esrm.ci.weatherstation@gmail.com", "7021$$mAuI^3")
+        s.login("*******", "*******")
         s.sendmail(me, [you], msg.as_string())
         s.quit()
     #once all is consistently recovered, reset all the check values and turn off the alert system
